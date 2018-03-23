@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class HomeScreen extends AppCompatActivity {
+import edu.rit.tinyturtle.offlinehomeworkplanner.dummy.DummyContent;
+
+public class HomeScreen extends AppCompatActivity implements HomeList.OnListFragmentInteractionListener {
 
     private TextView mTextMessage;
 
@@ -41,4 +43,8 @@ public class HomeScreen extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
+    }
 }
