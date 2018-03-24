@@ -1,0 +1,155 @@
+<!-- TODO: Update blank fragment layout -->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="edu.rit.tinyturtle.offlinehomeworkplanner.CreateCourse">
+
+    <EditText
+        android:id="@+id/course_create_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/name" />
+
+    <EditText
+        android:id="@+id/course_create_start"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/course_create_name"
+        tools:text="@string/start_time" />
+
+    <EditText
+        android:id="@+id/course_create_end"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/course_create_start"
+        tools:text="@string/end_time" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="@+id/course_create_end"
+        app:layout_constraintTop_toBottomOf="@+id/course_create_end"
+        tools:text="@string/days" />
+
+
+    <ToggleButton
+        android:id="@+id/sun_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/sun_abbrev"
+        android:textOn="@string/sun_abbrev"
+        app:layout_constraintEnd_toStartOf="@+id/mon_button"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ToggleButton
+        android:id="@+id/mon_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/mon_abbrev"
+        android:textOn="@string/mon_abbrev"
+        app:layout_constraintEnd_toStartOf="@+id/tue_button"
+        app:layout_constraintStart_toEndOf="@+id/sun_button"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ToggleButton
+        android:id="@+id/tue_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/tue_abbrev"
+        android:textOn="@string/tue_abbrev"
+        app:layout_constraintEnd_toStartOf="@+id/wed_button"
+        app:layout_constraintStart_toEndOf="@+id/mon_button"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ToggleButton
+        android:id="@+id/wed_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/wed_abbrev"
+        android:textOn="@string/wed_abbrev"
+        app:layout_constraintEnd_toStartOf="@+id/thu_button"
+        app:layout_constraintStart_toEndOf="@+id/tue_button"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ToggleButton
+        android:id="@+id/thu_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/thu_abbrev"
+        android:textOn="@string/thu_abbrev"
+        app:layout_constraintEnd_toStartOf="@+id/fri_button"
+        app:layout_constraintStart_toEndOf="@+id/wed_button"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ToggleButton
+        android:id="@+id/fri_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/fri_abbrev"
+        android:textOn="@string/fri_abbrev"
+        app:layout_constraintEnd_toStartOf="@+id/sat_button"
+        app:layout_constraintStart_toEndOf="@+id/thu_button"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ToggleButton
+        android:id="@+id/sat_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textOff="@string/sat_abbrev"
+        android:textOn="@string/sat_abbrev"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fri_button"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/create_course_save_button"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sat_button"
+        tools:text="@string/save" />
+
+</android.support.constraint.ConstraintLayout>
