@@ -56,7 +56,7 @@ public class HomeScreen extends AppCompatActivity implements HomeList.OnListFrag
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(Course item) {
 
     }
 
@@ -65,5 +65,10 @@ public class HomeScreen extends AppCompatActivity implements HomeList.OnListFrag
         transaction.replace(R.id.main_frag_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
     }
 }

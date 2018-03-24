@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import edu.rit.tinyturtle.offlinehomeworkplanner.dummy.DummyContent;
 import edu.rit.tinyturtle.offlinehomeworkplanner.dummy.DummyContent.DummyItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -69,7 +70,7 @@ public class HomeList extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new ClassItemRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new ClassItemRecyclerViewAdapter(new ArrayList<Course>(), mListener));
         }
         return view;
     }
@@ -104,6 +105,6 @@ public class HomeList extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(Course item);
     }
 }
