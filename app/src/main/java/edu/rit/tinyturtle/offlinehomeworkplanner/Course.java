@@ -1,12 +1,17 @@
 package edu.rit.tinyturtle.offlinehomeworkplanner;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 
-public class Course {
+public class Course implements Serializable {
     private String name;
     private LocalTime start;
     private LocalTime end;
     private boolean[] days;
+
+    public Course() {
+
+    }
 
     public Course(String name, LocalTime start, LocalTime end, boolean[] days) {
         this.name = name;

@@ -10,7 +10,7 @@
     tools:context="edu.rit.tinyturtle.offlinehomeworkplanner.CreateCourse">
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/course_create_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -24,7 +24,7 @@
         tools:text="@string/name" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/course_create_start"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -34,11 +34,11 @@
         android:inputType="time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4"
+        app:layout_constraintTop_toBottomOf="@+id/course_create_name"
         tools:text="@string/start_time" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/course_create_end"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -48,7 +48,7 @@
         android:inputType="time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5"
+        app:layout_constraintTop_toBottomOf="@+id/course_create_start"
         tools:text="@string/end_time" />
 
 
@@ -56,10 +56,10 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText6"
+        app:layout_constraintStart_toStartOf="@+id/course_create_end"
+        app:layout_constraintTop_toBottomOf="@+id/course_create_end"
         tools:text="@string/days" />
 
 
@@ -142,7 +142,8 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/create_course_save_button"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -150,4 +151,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sat_button"
         tools:text="@string/save" />
+
 </android.support.constraint.ConstraintLayout>

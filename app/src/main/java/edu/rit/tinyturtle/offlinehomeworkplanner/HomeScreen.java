@@ -8,18 +8,21 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import edu.rit.tinyturtle.offlinehomeworkplanner.dummy.DummyContent;
 
-public class HomeScreen extends AppCompatActivity implements HomeList.OnListFragmentInteractionListener,
+public class HomeScreen extends AppCompatActivity implements
         NotesList.OnListFragmentInteractionListener, HomeworkList.OnListFragmentInteractionListener {
 
-    private TextView mTextMessage;
     FragmentManager fragmentManager;
     HomeList homeListFrag;
     NotesList notesListFrag;
     HomeworkList homeworkListFrag;
+
+    List<Course> courses;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -49,18 +52,13 @@ public class HomeScreen extends AppCompatActivity implements HomeList.OnListFrag
         homeListFrag = new HomeList();
         homeworkListFrag = new HomeworkList();
         notesListFrag = new NotesList();
+        courses = new ArrayList<>();
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
-    @Override
-    public void onListFragmentInteraction(Course item) {
-
-    }
-
-    private void openFragment(Fragment fragment) {
+    public void openFragment(Fragment fragment) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.main_frag_container, fragment);
         transaction.addToBackStack(null);
@@ -70,5 +68,9 @@ public class HomeScreen extends AppCompatActivity implements HomeList.OnListFrag
     @Override
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
 
+    }
+
+    public List<Course> getCourses() {
+        return courses;
     }
 }
