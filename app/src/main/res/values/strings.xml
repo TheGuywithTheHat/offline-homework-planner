@@ -3,4 +3,19 @@
     <string name="title_home">Home</string>
     <string name="title_notes">Notes</string>
     <string name="title_homework">Homework</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="start_time">Start time</string>
+    <string name="end_time">End time</string>
+    <string name="name">Name</string>
+    <string name="sat_abbrev">S</string>
+    <string name="mon_abbrev">M</string>
+    <string name="sun_abbrev">S</string>
+    <string name="tue_abbrev">T</string>
+    <string name="wed_abbrev">W</string>
+    <string name="thu_abbrev">T</string>
+    <string name="fri_abbrev">F</string>
+    <string name="save">Save</string>
+    <string name="days">Days</string>
 </resources>

@@ -6,24 +6,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import edu.rit.tinyturtle.offlinehomeworkplanner.HomeList.OnListFragmentInteractionListener;
-import edu.rit.tinyturtle.offlinehomeworkplanner.dummy.DummyContent.DummyItem;
-
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
+ * {@link RecyclerView.Adapter} that can display a {@link Course} and makes a call to the
+ * specified {@link HomeScreen}.
  */
 public class ClassItemRecyclerViewAdapter extends RecyclerView.Adapter<ClassItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final List<Course> mValues;
+    private final HomeScreen parent;
 
-    public ClassItemRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public ClassItemRecyclerViewAdapter(List<Course> items, HomeScreen parent) {
         mValues = items;
-        mListener = listener;
+        this.parent = parent;
     }
 
     @Override
@@ -36,16 +32,15 @@ public class ClassItemRecyclerViewAdapter extends RecyclerView.Adapter<ClassItem
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.mNameView.setText(mValues.get(position).getName());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
+                if (null != parent) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
+                    parent.openFragment(CreateCourse.newInstance(holder.mItem));
                 }
             }
         });
@@ -58,20 +53,18 @@ public class ClassItemRecyclerViewAdapter extends RecyclerView.Adapter<ClassItem
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final TextView mNameView;
+        public Course mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mNameView = (TextView) view.findViewById(R.id.course_name);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + mNameView.getText() + "'";
         }
     }
 }
