@@ -111,7 +111,7 @@ public class CreateHomework extends Fragment implements AdapterView.OnItemSelect
                     sdf.parse(dueDate);
                     if (homework == null) {
                         homework = new Homework();
-                        parent.getHomework().add(homework);
+                        parent.getHomeworks().add(homework);
                     }
 
                     homework.setName(((EditText) (view.findViewById(R.id.homework_create_title))).getText().toString());

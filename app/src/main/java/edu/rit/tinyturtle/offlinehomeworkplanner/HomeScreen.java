@@ -12,10 +12,7 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.rit.tinyturtle.offlinehomeworkplanner.dummy.DummyContent;
-
-public class HomeScreen extends AppCompatActivity implements
-        NotesList.OnListFragmentInteractionListener, HomeworkList.OnListFragmentInteractionListener {
+public class HomeScreen extends AppCompatActivity {
 
     FragmentManager fragmentManager;
     HomeList homeListFrag;
@@ -23,7 +20,8 @@ public class HomeScreen extends AppCompatActivity implements
     HomeworkList homeworkListFrag;
 
     List<Course> courses;
-    List<Homework> homework;
+    List<Homework> homeworks;
+    List<Notes> notes;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -54,10 +52,12 @@ public class HomeScreen extends AppCompatActivity implements
         homeworkListFrag = new HomeworkList();
         notesListFrag = new NotesList();
         courses = new ArrayList<>();
-        homework = new ArrayList<>();
+        homeworks = new ArrayList<>();
+        notes = new ArrayList<>();
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
     }
 
     public void openFragment(Fragment fragment) {
@@ -67,16 +67,15 @@ public class HomeScreen extends AppCompatActivity implements
         transaction.commit();
     }
 
-    @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
-    }
-
     public List<Course> getCourses() {
         return courses;
     }
 
-    public List<Homework> getHomework() {
-        return homework;
+    public List<Homework> getHomeworks() {
+        return homeworks;
+    }
+
+    public List<Notes> getNotes() {
+        return notes;
     }
 }
