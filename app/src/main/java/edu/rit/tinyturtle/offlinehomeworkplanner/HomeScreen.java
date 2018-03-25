@@ -1,5 +1,6 @@
 package edu.rit.tinyturtle.offlinehomeworkplanner;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -52,7 +53,10 @@ public class HomeScreen extends AppCompatActivity {
         homeworkListFrag = new HomeworkList();
         notesListFrag = new NotesList();
         courses = new ArrayList<>();
+        courses.add(new Course("default", "09:00 AM", "10:00 AM",
+                new boolean[] {false, true, false, true, false, true, false}, Color.MAGENTA));
         homeworks = new ArrayList<>();
+        homeworks.add(new Homework("default hw","03/30/2018", courses.get(0),  false));
         notes = new ArrayList<>();
 
         BottomNavigationView navigation = findViewById(R.id.navigation);

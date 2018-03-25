@@ -14,12 +14,13 @@ public class Course implements Serializable {
         this.archived = false;
     }
 
-    public Course(String name, String start, String end, boolean[] days) {
+    public Course(String name, String start, String end, boolean[] days, int colorHex) {
         this.name = name;
         this.start = start;
         this.end = end;
         this.days = days;
         this.archived = false;
+        this.colorHex = colorHex;
     }
 
     public String getName() {
