@@ -8,6 +8,7 @@ public class Course implements Serializable {
     private String end;
     private boolean[] days;
     private int colorHex;
+    private boolean archived;
 
     public Course() {
 
@@ -66,5 +67,14 @@ public class Course implements Serializable {
 
     public void setColor(int colorHex) {
         this.colorHex = colorHex;
+    }
+
+
+    public boolean isArchived() {
+        return archived;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
     }
 }

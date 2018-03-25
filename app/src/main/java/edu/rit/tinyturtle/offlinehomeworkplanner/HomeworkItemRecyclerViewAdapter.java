@@ -23,10 +23,12 @@ public class HomeworkItemRecyclerViewAdapter extends RecyclerView.Adapter<Homewo
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.homework_list_item, parent, false);
-        return new ViewHolder(view);
+    public ViewHolder onCreateViewHolder(ViewGroup parentGroup, int viewType) {
+        View view = LayoutInflater.from(parentGroup.getContext())
+                .inflate(R.layout.homework_list_item, parentGroup, false);
+        ViewHolder viewHolder = new ViewHolder(view);
+
+        return viewHolder;
     }
 
     @Override

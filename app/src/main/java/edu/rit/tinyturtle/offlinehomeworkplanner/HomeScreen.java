@@ -1,6 +1,5 @@
 package edu.rit.tinyturtle.offlinehomeworkplanner;
 
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -9,8 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +69,10 @@ public class HomeScreen extends AppCompatActivity {
 
     public List<Course> getCourses() {
         return courses;
+    }
+
+    public boolean deleteCourse(Course c){
+        return courses.remove(c);
     }
 
     public List<Homework> getHomeworks() {

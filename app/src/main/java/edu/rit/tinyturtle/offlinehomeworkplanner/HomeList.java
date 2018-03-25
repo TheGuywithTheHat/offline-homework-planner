@@ -52,6 +52,7 @@ public class HomeList extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.class_list, container, false);
 
+
         FloatingActionButton newCourseFab = view.findViewById(R.id.create_course_button);
         newCourseFab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

@@ -25,4 +25,7 @@
     <string name="invalid_start_end">Please select valid start and end times.</string>
     <string name="description">Description</string>
     <string name="color">Color</string>
+    <string name="edit">Edit</string>
+    <string name="archive">Archive</string>
+    <string name="delete">Delete</string>
 </resources>

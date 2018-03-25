@@ -1,9 +1,12 @@
 package edu.rit.tinyturtle.offlinehomeworkplanner;
 
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.List;
@@ -23,10 +26,38 @@ public class ClassItemRecyclerViewAdapter extends RecyclerView.Adapter<ClassItem
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.class_list_item, parent, false);
-        return new ViewHolder(view);
+    public ViewHolder onCreateViewHolder(ViewGroup parentGroup, int viewType) {
+        View view = LayoutInflater.from(parentGroup.getContext())
+                .inflate(R.layout.class_list_item, parentGroup, false);
+        final ClassItemRecyclerViewAdapter.ViewHolder viewHolder = new ClassItemRecyclerViewAdapter.ViewHolder(view);
+        ImageButton overflow = ((ImageButton) view.findViewById(R.id.class_list_overflow_button));
+        overflow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+                popupMenu.getMenuInflater().inflate(R.menu.class_overflow, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.class_overflow_edit:
+                                // Remove the item from the adapter
+                                parent.openFragment(CreateCourse.newInstance(viewHolder.mItem));
+                                return true;
+                            case R.id.class_overflow_archive:
+                                viewHolder.mItem.setArchived(true);
+                                return true;
+                            case R.id.class_overflow_delete:
+                                parent.deleteCourse(viewHolder.mItem);
+                                mValues.remove((viewHolder.mItem));
+                        }
+                        return false;
+                    }
+                });
+                popupMenu.show();
+            }
+        });
+        return viewHolder;
     }
 
     @Override
