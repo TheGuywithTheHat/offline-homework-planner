@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentContainer;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -31,12 +32,16 @@ public class HomeScreen extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+
+                    getSupportActionBar().setTitle(R.string.title_home);
                     openFragment(homeListFrag);
                     return true;
                 case R.id.navigation_notes:
+                    getSupportActionBar().setTitle(R.string.title_notes);
                     openFragment(notesListFrag);
                     return true;
                 case R.id.navigation_homework:
+                    getSupportActionBar().setTitle(R.string.title_homework);
                     openFragment(homeworkListFrag);
                     return true;
             }
