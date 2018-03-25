@@ -2,6 +2,7 @@ package edu.rit.tinyturtle.offlinehomeworkplanner;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import edu.rit.tinyturtle.offlinehomeworkplanner.dummy.DummyContent;
 import edu.rit.tinyturtle.offlinehomeworkplanner.dummy.DummyContent.DummyItem;
 
 /**
@@ -25,7 +25,7 @@ public class HomeworkList extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
+    private HomeScreen parent;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -59,16 +59,21 @@ public class HomeworkList extends Fragment {
         View view = inflater.inflate(R.layout.homework_list, container, false);
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+        FloatingActionButton newCourseFab = view.findViewById(R.id.create_homework_button);
+        newCourseFab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                parent.openFragment(CreateHomework.newInstance(null));
             }
-            recyclerView.setAdapter(new HomeworkItemRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+        });
+        Context context = view.getContext();
+        RecyclerView recyclerView = view.findViewById(R.id.homework_list);
+        if (mColumnCount <= 1) {
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        } else {
+            recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
+        recyclerView.setAdapter(new HomeworkItemRecyclerViewAdapter(parent.getHomework(), parent));
+
         return view;
     }
 
@@ -76,18 +81,16 @@ public class HomeworkList extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnListFragmentInteractionListener");
+
+        if (context instanceof HomeScreen) {
+            parent = (HomeScreen) context;
         }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        parent = null;
     }
 
     /**

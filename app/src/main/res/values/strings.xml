@@ -18,4 +18,9 @@
     <string name="fri_abbrev">F</string>
     <string name="save">Save</string>
     <string name="days">Days</string>
+    <string name="title">Title</string>
+    <string name="due_date">Due Date</string>
+    <string name="select_class">Select Class</string>
+    <string name="invalid_due_date">Please select valid due date.</string>
+
 </resources>

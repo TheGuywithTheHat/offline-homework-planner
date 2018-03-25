@@ -23,6 +23,7 @@ public class HomeScreen extends AppCompatActivity implements
     HomeworkList homeworkListFrag;
 
     List<Course> courses;
+    List<Homework> homework;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -53,6 +54,7 @@ public class HomeScreen extends AppCompatActivity implements
         homeworkListFrag = new HomeworkList();
         notesListFrag = new NotesList();
         courses = new ArrayList<>();
+        homework = new ArrayList<>();
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -72,5 +74,9 @@ public class HomeScreen extends AppCompatActivity implements
 
     public List<Course> getCourses() {
         return courses;
+    }
+
+    public List<Homework> getHomework() {
+        return homework;
     }
 }
