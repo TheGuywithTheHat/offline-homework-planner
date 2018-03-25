@@ -8,6 +8,7 @@ public class Course implements Serializable {
     private LocalTime start;
     private LocalTime end;
     private boolean[] days;
+    private int colorHex;
 
     public Course() {
 
@@ -58,5 +59,13 @@ public class Course implements Serializable {
 
     public void setDay(int i, boolean b) {
         this.days[i] = b;
+    }
+
+    public int getColor() {
+        return colorHex;
+    }
+
+    public void setColor(int colorHex) {
+        this.colorHex = colorHex;
     }
 }

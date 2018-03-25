@@ -1,12 +1,17 @@
 package edu.rit.tinyturtle.offlinehomeworkplanner;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
+
+import com.pes.androidmaterialcolorpickerdialog.ColorPicker;
+import com.pes.androidmaterialcolorpickerdialog.ColorPickerCallback;
 
 
 /**
@@ -14,15 +19,19 @@ import android.widget.EditText;
  * Use the {@link CreateCourse#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CreateCourse extends Fragment {
+public class CreateCourse extends Fragment implements ColorPickerCallback {
     private static final String ARG_COURSE = "course";
 
     private Course course;
+    private int colorHex;
+    private View colorView;
+    private ColorPicker cp;
 
     private HomeScreen parent;
 
     public CreateCourse() {
         // Required empty public constructor
+
     }
 
     /**
@@ -53,6 +62,21 @@ public class CreateCourse extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_create_course, container, false);
+        colorHex = getResources().getColor(R.color.colorAccent);
+
+        View.OnClickListener colorPickerClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cp = new ColorPicker(getActivity(), Color.red(colorHex), Color.green(colorHex), Color.blue(colorHex));
+                cp.show();
+                cp.setCallback(CreateCourse.this);
+            }
+        };
+        ImageButton pickerButton = (ImageButton) view.findViewById(R.id.color_picker_button);
+        colorView = (View) view.findViewById(R.id.color_rectangle);
+        pickerButton.setOnClickListener(colorPickerClickListener);
+        colorView.setOnClickListener(colorPickerClickListener);
+
         view.findViewById(R.id.create_course_save_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(course == null) {
@@ -85,5 +109,13 @@ public class CreateCourse extends Fragment {
     public void onDetach() {
         super.onDetach();
         parent = null;
+    }
+
+    @Override
+    public void onColorChosen(int color) {
+        colorHex = color;
+        colorView.setBackgroundColor(color);
+        cp.dismiss();
+
     }
 }
