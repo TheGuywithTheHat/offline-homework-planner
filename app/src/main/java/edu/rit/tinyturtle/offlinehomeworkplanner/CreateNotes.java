@@ -11,17 +11,17 @@ import android.widget.EditText;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CreateCourse#newInstance} factory method to
+ * Use the {@link CreateNotes#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CreateCourse extends Fragment {
-    private static final String ARG_COURSE = "course";
+public class CreateNotes extends Fragment {
+    private static final String ARG_NOTES = "notes";
 
-    private Course course;
+    private Notes notes;
 
     private HomeScreen parent;
 
-    public CreateCourse() {
+    public CreateNotes() {
         // Required empty public constructor
     }
 
@@ -29,13 +29,13 @@ public class CreateCourse extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param course Course to edit, if any.
-     * @return A new instance of fragment CreateCourse.
+     * @param notes Notes to edit, if any.
+     * @return A new instance of fragment CreateNotes.
      */
-    public static CreateCourse newInstance(Course course) {
-        CreateCourse fragment = new CreateCourse();
+    public static CreateNotes newInstance(Notes notes) {
+        CreateNotes fragment = new CreateNotes();
         Bundle args = new Bundle();
-        args.putSerializable(ARG_COURSE, course);
+        args.putSerializable(ARG_NOTES, notes);
         fragment.setArguments(args);
         return fragment;
     }
@@ -44,7 +44,7 @@ public class CreateCourse extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            course = (Course)getArguments().getSerializable(ARG_COURSE);
+            notes = (Notes)getArguments().getSerializable(ARG_NOTES);
         }
     }
 
@@ -52,22 +52,27 @@ public class CreateCourse extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_create_course, container, false);
-        view.findViewById(R.id.create_course_save_button).setOnClickListener(new View.OnClickListener() {
+        final View view = inflater.inflate(R.layout.fragment_create_notes, container, false);
+        view.findViewById(R.id.create_notes_save_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(course == null) {
-                    course = new Course();
-                    parent.getCourses().add(course);
+                if(notes == null) {
+                    notes = new Notes();
+                    parent.getNotes().add(notes);
                 }
 
-                course.setName(((EditText)(view.findViewById(R.id.homework_create_name))).getText().toString());
-                //course.setStart(LocalTime.parse(((EditText)(view.findViewById(R.id.course_create_start))).getText().toString()));
-                parent.openFragment(parent.homeListFrag);
+                notes.setName(((EditText)(view.findViewById(R.id.notes_create_name))).getText().toString());
+                parent.openFragment(parent.notesListFrag); //TODO: change to new notes page
             }
         });
 
-        if(null != course) {
-            ((EditText) view.findViewById(R.id.homework_create_name)).setText(course.getName());
+        //TODO: finish spinner adapter
+        //((Spinner)view.findViewById(R.id.notes_create_course)).set
+
+        if(notes != null) {
+            if(notes.getCourse() != null) {
+                ((EditText) view.findViewById(R.id.notes_create_name)).setText(notes.getName());
+            }
+
         }
 
         return view;

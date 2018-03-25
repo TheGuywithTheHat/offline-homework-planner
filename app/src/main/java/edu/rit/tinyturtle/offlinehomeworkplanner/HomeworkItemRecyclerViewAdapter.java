@@ -8,13 +8,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import edu.rit.tinyturtle.offlinehomeworkplanner.HomeworkList.OnListFragmentInteractionListener;
-import edu.rit.tinyturtle.offlinehomeworkplanner.dummy.DummyContent.DummyItem;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
+ * {@link RecyclerView.Adapter} that can display a {@link Homework}
  */
 public class HomeworkItemRecyclerViewAdapter extends RecyclerView.Adapter<HomeworkItemRecyclerViewAdapter.ViewHolder> {
 
@@ -36,7 +32,7 @@ public class HomeworkItemRecyclerViewAdapter extends RecyclerView.Adapter<Homewo
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mTitleView.setText(mValues.get(position).getName());
+        holder.mNameView.setText(mValues.get(position).getName());
         holder.mDueDateView.setText(mValues.get(position).getDueDate());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -58,20 +54,20 @@ public class HomeworkItemRecyclerViewAdapter extends RecyclerView.Adapter<Homewo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mTitleView;
+        public final TextView mNameView;
         public final TextView mDueDateView;
         public Homework mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mTitleView = (TextView) view.findViewById(R.id.title);
+            mNameView = (TextView) view.findViewById(R.id.title);
             mDueDateView = (TextView) view.findViewById(R.id.dueDate);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mTitleView.getText() + ", " + mDueDateView.getText() + "'";
+            return super.toString() + " '" + mNameView.getText() + ", " + mDueDateView.getText() + "'";
         }
     }
 }

@@ -15,10 +15,8 @@ import android.view.ViewGroup;
  * A fragment representing a list of Items.
  */
 public class HomeList extends Fragment {
-
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
+
     private int mColumnCount = 1;
     private HomeScreen parent;
 

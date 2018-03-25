@@ -1,5 +1,3 @@
-<!-- TODO: Update blank fragment layout -->
-
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,32 +8,32 @@
     tools:context="edu.rit.tinyturtle.offlinehomeworkplanner.CreateCourse">
 
     <EditText
-        android:id="@+id/course_create_name"
+        android:id="@+id/homework_create_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
+        android:hint="@string/name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/name" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/course_create_start"
+        android:id="@+id/homework_create_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
+        android:hint="@string/start_time"
         android:inputType="time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/course_create_name"
-        tools:text="@string/start_time" />
+        app:layout_constraintTop_toBottomOf="@+id/homework_create_name" />
 
     <EditText
         android:id="@+id/course_create_end"
@@ -45,11 +43,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
+        android:hint="@string/end_time"
         android:inputType="time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/course_create_start"
-        tools:text="@string/end_time" />
+        app:layout_constraintTop_toBottomOf="@+id/homework_create_description" />
 
 
     <TextView
@@ -71,7 +69,6 @@
         android:textOff="@string/sun_abbrev"
         android:textOn="@string/sun_abbrev"
         app:layout_constraintEnd_toStartOf="@+id/mon_button"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -148,8 +145,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
+        android:text="@string/save"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sat_button"
-        tools:text="@string/save" />
+        app:layout_constraintTop_toBottomOf="@+id/sat_button" />
 
 </android.support.constraint.ConstraintLayout>
