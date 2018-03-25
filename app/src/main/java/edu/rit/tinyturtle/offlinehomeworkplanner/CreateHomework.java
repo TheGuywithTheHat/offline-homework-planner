@@ -78,7 +78,7 @@ public class CreateHomework extends Fragment implements AdapterView.OnItemSelect
             @Override
             public void onClick(View view) {
                 DialogFragment datePicker = new DatePickerFragment();
-                datePicker.show(getFragmentManager(), "date picker");
+                datePicker.show(getFragmentManager(), "datepicker");
             }
         };
         ImageButton dateButton = (ImageButton) view.findViewById(R.id.open_date_button);
