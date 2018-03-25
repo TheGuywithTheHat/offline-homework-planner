@@ -56,7 +56,6 @@ public class ClassItemRecyclerViewAdapter extends RecyclerView.Adapter<ClassItem
                                 return true;
                             case R.id.class_overflow_delete:
                                 parent.deleteCourse(viewHolder.mItem);
-                                mValues.remove((viewHolder.mItem));
                                 parent.openFragment(new HomeList());
                                 return true;
                         }

@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class HomeScreen extends AppCompatActivity {
 
@@ -56,8 +57,9 @@ public class HomeScreen extends AppCompatActivity {
         courses.add(new Course("default", "09:00 AM", "10:00 AM",
                 new boolean[] {false, true, false, true, false, true, false}, Color.MAGENTA));
         homeworks = new ArrayList<>();
-        homeworks.add(new Homework("default hw","03/30/2018", courses.get(0),  false));
+        homeworks.add(new Homework("default hw","3/30/2018", courses.get(0),  false));
         notes = new ArrayList<>();
+        notes.add(new Notes("default note", courses.get(0)));
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -76,15 +78,36 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     public boolean deleteCourse(Course c){
-        return courses.remove(c);
+        if (courses.remove(c)){
+            ListIterator<Homework> hIter = homeworks.listIterator();
+            while (hIter.hasNext()){
+                if (hIter.next().getCourse() == c){
+                    hIter.remove();
+                }
+            }
+            ListIterator<Notes> nIter = notes.listIterator();
+            while (nIter.hasNext()){
+                if (nIter.next().getCourse() == c){
+                    nIter.remove();
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     public List<Homework> getHomeworks() {
         return homeworks;
     }
+    public boolean deleteHomework(Homework h){
+        return homeworks.remove(h);
+    }
 
     public List<Notes> getNotes() {
         return notes;
+    }
+    public boolean deleteNote(Notes n){
+        return notes.remove(n);
     }
 
 

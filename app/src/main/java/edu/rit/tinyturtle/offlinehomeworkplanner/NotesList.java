@@ -52,8 +52,8 @@ public class NotesList extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.notes_list, container, false);
 
-        FloatingActionButton newHWFab = view.findViewById(R.id.create_notes_button);
-        newHWFab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton newNotesFab = view.findViewById(R.id.create_notes_button);
+        newNotesFab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 parent.openFragment(CreateNotes.newInstance(null));
             }

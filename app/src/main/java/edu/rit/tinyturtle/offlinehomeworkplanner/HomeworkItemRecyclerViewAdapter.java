@@ -1,9 +1,12 @@
 package edu.rit.tinyturtle.offlinehomeworkplanner;
 
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.List;
@@ -26,7 +29,32 @@ public class HomeworkItemRecyclerViewAdapter extends RecyclerView.Adapter<Homewo
     public ViewHolder onCreateViewHolder(ViewGroup parentGroup, int viewType) {
         View view = LayoutInflater.from(parentGroup.getContext())
                 .inflate(R.layout.homework_list_item, parentGroup, false);
-        ViewHolder viewHolder = new ViewHolder(view);
+        final ViewHolder viewHolder = new ViewHolder(view);
+        ImageButton overflow = ((ImageButton) view.findViewById(R.id.homework_list_overflow_button));
+        overflow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+                popupMenu.getMenuInflater().inflate(R.menu.homework_overflow, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.homework_overflow_complete:
+                                viewHolder.mItem.setCompleted(true);
+                                parent.openFragment(new HomeworkList());
+                                return true;
+                            case R.id.homework_overflow_delete:
+                                parent.deleteHomework(viewHolder.mItem);
+                                parent.openFragment(new HomeworkList());
+                                return true;
+                        }
+                        return false;
+                    }
+                });
+                popupMenu.show();
+            }
+        });
         return viewHolder;
     }
 

@@ -6,7 +6,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -14,10 +20,13 @@ import android.widget.EditText;
  * Use the {@link CreateNotes#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CreateNotes extends Fragment {
+public class CreateNotes extends Fragment implements AdapterView.OnItemSelectedListener{
     private static final String ARG_NOTES = "notes";
 
     private Notes notes;
+    private Course course;
+    private Spinner spinner;
+    private ArrayAdapter<String> adapter;
 
     private HomeScreen parent;
 
@@ -53,6 +62,23 @@ public class CreateNotes extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_create_notes, container, false);
+        spinner = (Spinner) view.findViewById(R.id.notes_create_course);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        List<Course> courses = parent.getCourses();
+        List<String> courseNames = new ArrayList<>();
+        for (Course course : courses) {
+            courseNames.add(course.getName());
+        }
+
+        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, courseNames);
+
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.add(getString(R.string.select_class));
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+        spinner.setSelection(adapter.getCount()-1);
+        spinner.setOnItemSelectedListener(this);
         view.findViewById(R.id.create_notes_save_button).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(notes == null) {
@@ -61,6 +87,7 @@ public class CreateNotes extends Fragment {
                 }
 
                 notes.setName(((EditText)(view.findViewById(R.id.notes_create_name))).getText().toString());
+                notes.setCourse(course);
                 parent.openFragment(parent.notesListFrag); //TODO: change to new notes page
             }
         });
@@ -90,5 +117,19 @@ public class CreateNotes extends Fragment {
     public void onDetach() {
         super.onDetach();
         parent = null;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        if (!spinner.getSelectedItem().equals(getString(R.string.select_class))) {
+            course = parent.getCourses().get(i);
+            adapter.remove(getString(R.string.select_class));
+
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }

@@ -45,35 +45,21 @@
         app:layout_constraintTop_toBottomOf="@+id/homework_create_due_date" />
 
 
-    <com.andexert.library.RippleView
-        android:id="@+id/rippleView"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+    <ImageButton
+        android:id="@+id/open_date_button"
+        android:layout_width="48dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        android:src="@android:drawable/ic_menu_my_calendar"
+        android:tint="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/homework_create_save"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homework_create_course"
-        app:rv_color="@color/colorPrimaryDark"
-        app:rv_framerate="5">
-
-        <ImageButton
-            android:id="@+id/open_date_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@android:color/transparent"
-            android:src="@android:drawable/ic_menu_my_calendar"
-            android:tint="@android:color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/rippleView"
-            app:layout_constraintEnd_toEndOf="@+id/rippleView"
-            app:layout_constraintStart_toStartOf="@+id/rippleView"
-            app:layout_constraintTop_toTopOf="@+id/rippleView" />
-
-    </com.andexert.library.RippleView>
-
+        app:layout_constraintTop_toBottomOf="@+id/homework_create_course" />
 
 
     <EditText
@@ -86,7 +72,7 @@
         android:editable="false"
         android:hint="@string/due_date"
         android:inputType="none"
-        app:layout_constraintEnd_toStartOf="@+id/rippleView"
+        app:layout_constraintEnd_toStartOf="@+id/open_date_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homework_create_course" />
 
