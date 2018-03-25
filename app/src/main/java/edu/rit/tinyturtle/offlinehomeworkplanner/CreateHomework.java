@@ -1,5 +1,6 @@
 package edu.rit.tinyturtle.offlinehomeworkplanner;
 
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,11 +14,14 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -30,9 +34,11 @@ import java.util.Locale;
  * Use the {@link CreateHomework#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CreateHomework extends Fragment implements AdapterView.OnItemSelectedListener {
+public class CreateHomework extends Fragment implements AdapterView.OnItemSelectedListener, TimePickerDialog.OnTimeSetListener {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_HOMEWORK = "homework";
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+
 
     private Homework homework;
     private Course course;
@@ -74,17 +80,32 @@ public class CreateHomework extends Fragment implements AdapterView.OnItemSelect
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_create_homework, container, false);
-        View.OnClickListener dateClickListener = new View.OnClickListener() {
+        OnFocusOrClickListener dateClickListener = new OnFocusOrClickListener() {
             @Override
             public void onClick(View view) {
                 DialogFragment datePicker = new DatePickerFragment();
+                Calendar c = Calendar.getInstance();
+                try{
+                    Date date = sdf.parse(((EditText) getActivity().findViewById(R.id.homework_create_due_date)).getText().toString());
+                    c.setTime(date);
+                } catch (ParseException e) {}
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+                Bundle args = new Bundle();
+                args.putInt(DatePickerFragment.ARG_YEAR, year);
+                args.putInt(DatePickerFragment.ARG_MONTH, month);
+                args.putInt(DatePickerFragment.ARG_DAY, day);
+                datePicker.setArguments(args);
                 datePicker.show(getFragmentManager(), "datepicker");
             }
         };
         ImageButton dateButton = (ImageButton) view.findViewById(R.id.open_date_button);
         EditText editDate = (EditText) view.findViewById(R.id.homework_create_due_date);
         dateButton.setOnClickListener(dateClickListener);
+        editDate.setOnFocusChangeListener(dateClickListener);
         editDate.setOnClickListener(dateClickListener);
+
 
         spinner = (Spinner) view.findViewById(R.id.homework_create_course);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -162,6 +183,12 @@ public class CreateHomework extends Fragment implements AdapterView.OnItemSelect
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
+    @Override
+    public void onTimeSet(TimePicker timePicker, int i, int i1) {
+
+    }
+
 
     /**
      * This interface must be implemented by activities that contain this
