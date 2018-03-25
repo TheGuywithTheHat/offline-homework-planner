@@ -18,4 +18,5 @@
     <string name="fri_abbrev">F</string>
     <string name="save">Save</string>
     <string name="days">Days</string>
+    <string name="description">Description</string>
 </resources>
