@@ -68,8 +68,11 @@ public class CreateNotes extends Fragment {
         //TODO: finish spinner adapter
         //((Spinner)view.findViewById(R.id.notes_create_course)).set
 
-        if(null != notes) {
-            ((EditText) view.findViewById(R.id.notes_create_name)).setText(notes.getName());
+        if(notes != null) {
+            if(notes.getCourse() != null) {
+                ((EditText) view.findViewById(R.id.notes_create_name)).setText(notes.getName());
+            }
+
         }
 
         return view;

@@ -8,13 +8,15 @@ import java.io.Serializable;
 
 public class Notes implements Serializable {
     private String name;
+    private Course course;
 
     public Notes() {
 
     }
 
-    public Notes(String name) {
-
+    public Notes(String name, Course course) {
+        this.name = name;
+        this.course = course;
     }
 
     public String getName() {
@@ -23,5 +25,13 @@ public class Notes implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

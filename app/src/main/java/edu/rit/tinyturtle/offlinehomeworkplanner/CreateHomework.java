@@ -117,7 +117,7 @@ public class CreateHomework extends Fragment implements AdapterView.OnItemSelect
                     homework.setName(((EditText) (view.findViewById(R.id.homework_create_title))).getText().toString());
                     homework.setCourse(course);
                     homework.setDueDate(((EditText) (view.findViewById(R.id.homework_create_due_date))).getText().toString());
-                    parent.openFragment(parent.homeListFrag);
+                    parent.openFragment(parent.homeworkListFrag);
                 } catch (ParseException e) {
                     Toast.makeText(getContext(), R.string.invalid_due_date, Toast.LENGTH_LONG).show();
 
@@ -127,7 +127,9 @@ public class CreateHomework extends Fragment implements AdapterView.OnItemSelect
         if(homework != null) {
             ((EditText) view.findViewById(R.id.homework_create_title)).setText(homework.getName());
             ((EditText) view.findViewById(R.id.homework_create_due_date)).setText(homework.getDueDate());
-            spinner.setSelection(adapter.getPosition(homework.getCourse().getName()));
+            if(homework.getCourse() != null) {
+                spinner.setSelection(adapter.getPosition(homework.getCourse().getName()));
+            }
         }
         return view;
     }
