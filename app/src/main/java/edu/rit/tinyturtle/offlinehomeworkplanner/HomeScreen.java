@@ -7,6 +7,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
@@ -24,6 +26,8 @@ public class HomeScreen extends AppCompatActivity {
     List<Course> courses;
     List<Homework> homeworks;
     List<Notes> notes;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -59,11 +63,25 @@ public class HomeScreen extends AppCompatActivity {
         homeworks = new ArrayList<>();
         homeworks.add(new Homework("default hw","3/30/2018", courses.get(0),  false));
         notes = new ArrayList<>();
-        notes.add(new Notes("default note", courses.get(0)));
+        notes.add(new Notes("default note", courses.get(0), "blank"));
 
-        BottomNavigationView navigation = findViewById(R.id.navigation);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
+        mDrawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        BottomNavigationView navigation = findViewById(R.id.navigation_drawer_settings);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (mToggle.onOptionsItemSelected(item)){
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void openFragment(Fragment fragment) {
