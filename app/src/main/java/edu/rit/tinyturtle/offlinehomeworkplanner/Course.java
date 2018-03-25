@@ -11,7 +11,7 @@ public class Course implements Serializable {
     private boolean archived;
 
     public Course() {
-
+        this.archived = false;
     }
 
     public Course(String name, String start, String end, boolean[] days) {
@@ -19,6 +19,7 @@ public class Course implements Serializable {
         this.start = start;
         this.end = end;
         this.days = days;
+        this.archived = false;
     }
 
     public String getName() {

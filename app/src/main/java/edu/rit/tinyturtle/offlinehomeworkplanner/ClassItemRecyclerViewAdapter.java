@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,8 +21,13 @@ public class ClassItemRecyclerViewAdapter extends RecyclerView.Adapter<ClassItem
     private final List<Course> mValues;
     private final HomeScreen parent;
 
-    public ClassItemRecyclerViewAdapter(List<Course> items, HomeScreen parent) {
-        mValues = items;
+    public ClassItemRecyclerViewAdapter(List<Course> items, HomeScreen parent, boolean archived) {
+        mValues = new ArrayList<>();
+        for (Course item: items){
+            if (item.isArchived() == archived){
+                mValues.add(item);
+            }
+        }
         this.parent = parent;
     }
 
@@ -46,10 +52,13 @@ public class ClassItemRecyclerViewAdapter extends RecyclerView.Adapter<ClassItem
                                 return true;
                             case R.id.class_overflow_archive:
                                 viewHolder.mItem.setArchived(true);
+                                parent.openFragment(new HomeList());
                                 return true;
                             case R.id.class_overflow_delete:
                                 parent.deleteCourse(viewHolder.mItem);
                                 mValues.remove((viewHolder.mItem));
+                                parent.openFragment(new HomeList());
+                                return true;
                         }
                         return false;
                     }
