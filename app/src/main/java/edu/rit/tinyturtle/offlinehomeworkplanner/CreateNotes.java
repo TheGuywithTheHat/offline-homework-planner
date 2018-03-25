@@ -19,7 +19,7 @@ public class CreateNotes extends Fragment {
 
     private Notes notes;
 
-    private HomeScreen parent;
+    private Parent parent;
 
     public CreateNotes() {
         // Required empty public constructor
@@ -61,7 +61,7 @@ public class CreateNotes extends Fragment {
                 }
 
                 notes.setName(((EditText)(view.findViewById(R.id.notes_create_name))).getText().toString());
-                parent.openFragment(parent.notesListFrag); //TODO: change to new notes page
+                parent.openFragment(parent.getNotesListFrag()); //TODO: change to new notes page
             }
         });
 
@@ -81,8 +81,8 @@ public class CreateNotes extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof HomeScreen) {
-            parent = (HomeScreen) context;
+        if (context instanceof Parent) {
+            parent = (Parent) context;
         }
     }
 

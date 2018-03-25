@@ -15,9 +15,9 @@ import java.util.List;
 public class HomeworkItemRecyclerViewAdapter extends RecyclerView.Adapter<HomeworkItemRecyclerViewAdapter.ViewHolder> {
 
     private final List<Homework> mValues;
-    private final HomeScreen parent;
+    private final Parent parent;
 
-    public HomeworkItemRecyclerViewAdapter(List<Homework> items, HomeScreen parent) {
+    public HomeworkItemRecyclerViewAdapter(List<Homework> items, Parent parent) {
         mValues = items;
         this.parent = parent;
     }

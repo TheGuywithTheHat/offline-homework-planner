@@ -14,9 +14,9 @@ import java.util.List;
 public class NotesItemRecyclerViewAdapter extends RecyclerView.Adapter<NotesItemRecyclerViewAdapter.ViewHolder> {
 
     private final List<Notes> mValues;
-    private final HomeScreen parent;
+    private final Parent parent;
 
-    public NotesItemRecyclerViewAdapter(List<Notes> items, HomeScreen parent) {
+    public NotesItemRecyclerViewAdapter(List<Notes> items, Parent parent) {
         mValues = items;
         this.parent = parent;
     }

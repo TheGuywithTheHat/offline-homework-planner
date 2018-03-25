@@ -18,7 +18,7 @@ public class HomeList extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
 
     private int mColumnCount = 1;
-    private HomeScreen parent;
+    private Parent parent;
 
 
     /**
@@ -66,7 +66,7 @@ public class HomeList extends Fragment {
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        recyclerView.setAdapter(new ClassItemRecyclerViewAdapter(parent.getCourses(), parent));
+        recyclerView.setAdapter(new CourseItemRecyclerViewAdapter(parent.getCourses(), parent));
 
         return view;
     }
@@ -76,8 +76,8 @@ public class HomeList extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if (context instanceof HomeScreen) {
-            parent = (HomeScreen)context;
+        if (context instanceof Parent) {
+            parent = (Parent)context;
         }
     }
 

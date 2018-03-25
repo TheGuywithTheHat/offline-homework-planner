@@ -12,16 +12,15 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeScreen extends AppCompatActivity {
+public class HomeScreen extends AppCompatActivity implements Parent {
+    private FragmentManager fragmentManager;
+    private HomeList homeListFrag;
+    private NotesList notesListFrag;
+    private HomeworkList homeworkListFrag;
 
-    FragmentManager fragmentManager;
-    HomeList homeListFrag;
-    NotesList notesListFrag;
-    HomeworkList homeworkListFrag;
-
-    List<Course> courses;
-    List<Homework> homeworks;
-    List<Notes> notes;
+    private List<Course> courses;
+    private List<Homework> homeworks;
+    private List<Notes> notes;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -77,5 +76,17 @@ public class HomeScreen extends AppCompatActivity {
 
     public List<Notes> getNotes() {
         return notes;
+    }
+
+    public HomeList getHomeListFrag() {
+        return homeListFrag;
+    }
+
+    public NotesList getNotesListFrag() {
+        return notesListFrag;
+    }
+
+    public HomeworkList getHomeworkListFrag() {
+        return homeworkListFrag;
     }
 }

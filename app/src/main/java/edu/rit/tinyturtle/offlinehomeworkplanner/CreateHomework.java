@@ -24,8 +24,6 @@ import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link CreateHomework.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link CreateHomework#newInstance} factory method to
  * create an instance of this fragment.
@@ -39,7 +37,7 @@ public class CreateHomework extends Fragment implements AdapterView.OnItemSelect
     private Spinner spinner;
     private ArrayAdapter<String>  adapter;
 
-    private HomeScreen parent;
+    private Parent parent;
 
 
     public CreateHomework() {
@@ -117,7 +115,7 @@ public class CreateHomework extends Fragment implements AdapterView.OnItemSelect
                     homework.setName(((EditText) (view.findViewById(R.id.homework_create_title))).getText().toString());
                     homework.setCourse(course);
                     homework.setDueDate(((EditText) (view.findViewById(R.id.homework_create_due_date))).getText().toString());
-                    parent.openFragment(parent.homeworkListFrag);
+                    parent.openFragment(parent.getHomeworkListFrag());
                 } catch (ParseException e) {
                     Toast.makeText(getContext(), R.string.invalid_due_date, Toast.LENGTH_LONG).show();
 
@@ -138,8 +136,8 @@ public class CreateHomework extends Fragment implements AdapterView.OnItemSelect
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof HomeScreen) {
-            parent = (HomeScreen) context;
+        if (context instanceof Parent) {
+            parent = (Parent) context;
         }
     }
 
@@ -161,19 +159,5 @@ public class CreateHomework extends Fragment implements AdapterView.OnItemSelect
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
     }
 }

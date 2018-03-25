@@ -6,22 +6,24 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+
+import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CreateCourse#newInstance} factory method to
+ * to handle interaction events.
+ * Use the {@link CourseView#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CreateCourse extends Fragment {
+public class CourseView extends Fragment implements Parent {
     private static final String ARG_COURSE = "course";
 
     private Course course;
 
     private Parent parent;
 
-    public CreateCourse() {
+    public CourseView() {
         // Required empty public constructor
     }
 
@@ -29,11 +31,11 @@ public class CreateCourse extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param course Course to edit, if any.
-     * @return A new instance of fragment CreateCourse.
+     * @param course Course this view displays.
+     * @return A new instance of fragment CourseView.
      */
-    public static CreateCourse newInstance(Course course) {
-        CreateCourse fragment = new CreateCourse();
+    public static CourseView newInstance(Course course) {
+        CourseView fragment = new CourseView();
         Bundle args = new Bundle();
         args.putSerializable(ARG_COURSE, course);
         fragment.setArguments(args);
@@ -52,25 +54,7 @@ public class CreateCourse extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_create_course, container, false);
-        view.findViewById(R.id.create_course_save_button).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if(course == null) {
-                    course = new Course();
-                    parent.getCourses().add(course);
-                }
-
-                course.setName(((EditText)(view.findViewById(R.id.homework_create_name))).getText().toString());
-                //course.setStart(LocalTime.parse(((EditText)(view.findViewById(R.id.course_create_start))).getText().toString()));
-                parent.openFragment(parent.getHomeListFrag());
-            }
-        });
-
-        if(null != course) {
-            ((EditText) view.findViewById(R.id.homework_create_name)).setText(course.getName());
-        }
-
-        return view;
+        return inflater.inflate(R.layout.fragment_class_view, container, false);
     }
 
     @Override
@@ -85,5 +69,40 @@ public class CreateCourse extends Fragment {
     public void onDetach() {
         super.onDetach();
         parent = null;
+    }
+
+    @Override
+    public void openFragment(Fragment fragment) {
+        parent.openFragment(fragment);
+    }
+
+    @Override
+    public List<Course> getCourses() {
+        return parent.getCourses();
+    }
+
+    @Override
+    public List<Homework> getHomeworks() {
+        return parent.getHomeworks();
+    }
+
+    @Override
+    public List<Notes> getNotes() {
+        return parent.getNotes();
+    }
+
+    @Override
+    public HomeList getHomeListFrag() {
+        return parent.getHomeListFrag();
+    }
+
+    @Override
+    public NotesList getNotesListFrag() {
+        return parent.getNotesListFrag();
+    }
+
+    @Override
+    public HomeworkList getHomeworkListFrag() {
+        return parent.getHomeworkListFrag();
     }
 }
