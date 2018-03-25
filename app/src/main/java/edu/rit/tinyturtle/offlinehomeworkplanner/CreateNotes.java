@@ -88,7 +88,7 @@ public class CreateNotes extends Fragment implements AdapterView.OnItemSelectedL
 
                 notes.setName(((EditText)(view.findViewById(R.id.notes_create_name))).getText().toString());
                 notes.setCourse(course);
-                parent.openFragment(parent.notesListFrag); //TODO: change to new notes page
+                parent.openFragment(NotesPage.newInstance(notes)); //TODO: change to new notes page
             }
         });
 
