@@ -28,7 +28,7 @@ public class CreateNotes extends Fragment implements AdapterView.OnItemSelectedL
     private Spinner spinner;
     private ArrayAdapter<String> adapter;
 
-    private HomeScreen parent;
+    private Parent parent;
 
     public CreateNotes() {
         // Required empty public constructor
@@ -88,7 +88,7 @@ public class CreateNotes extends Fragment implements AdapterView.OnItemSelectedL
 
                 notes.setName(((EditText)(view.findViewById(R.id.notes_create_name))).getText().toString());
                 notes.setCourse(course);
-                parent.openFragment(NotesPage.newInstance(notes)); //TODO: change to new notes page
+                parent.openFragment(NotesPage.newInstance(notes));
             }
         });
 
@@ -108,8 +108,8 @@ public class CreateNotes extends Fragment implements AdapterView.OnItemSelectedL
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof HomeScreen) {
-            parent = (HomeScreen) context;
+        if (context instanceof Parent) {
+            parent = (Parent) context;
         }
     }
 

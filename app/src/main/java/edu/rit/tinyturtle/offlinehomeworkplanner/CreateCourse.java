@@ -42,7 +42,7 @@ public class CreateCourse extends Fragment implements ColorPickerCallback {
     private ColorPicker cp;
 
 
-    private HomeScreen parent;
+    private Parent parent;
 
     public CreateCourse() {
         // Required empty public constructor
@@ -135,7 +135,7 @@ public class CreateCourse extends Fragment implements ColorPickerCallback {
                     course.setEnd(sdf.format(end));
                     course.setDays(getDays(view));
                     course.setColor(colorHex);
-                    parent.openFragment(parent.homeListFrag);
+                    parent.openFragment(parent.getHomeListFrag());
                 } catch (ParseException e) {
                     Toast.makeText(getContext(), R.string.invalid_start_end, Toast.LENGTH_LONG).show();
                 }
@@ -156,8 +156,8 @@ public class CreateCourse extends Fragment implements ColorPickerCallback {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof HomeScreen) {
-            parent = (HomeScreen) context;
+        if (context instanceof Parent) {
+            parent = (Parent) context;
         }
     }
 

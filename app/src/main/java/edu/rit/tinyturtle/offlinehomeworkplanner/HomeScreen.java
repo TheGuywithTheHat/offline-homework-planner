@@ -18,7 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-public class HomeScreen extends AppCompatActivity {
+public class HomeScreen extends AppCompatActivity implements Parent {
+    private FragmentManager fragmentManager;
+    private HomeList homeListFrag;
+    private NotesList notesListFrag;
+    private HomeworkList homeworkListFrag;
 
     FragmentManager fragmentManager;
     HomeList homeListFrag;
@@ -143,19 +147,38 @@ public class HomeScreen extends AppCompatActivity {
         return false;
     }
 
+    @Override
     public List<Homework> getHomeworks() {
         return homeworks;
     }
+
+    @Override
     public boolean deleteHomework(Homework h){
         return homeworks.remove(h);
     }
 
+    @Override
     public List<Notes> getNotes() {
         return notes;
     }
+
+    @Override
     public boolean deleteNote(Notes n){
         return notes.remove(n);
     }
 
+    @Override
+    public HomeList getHomeListFrag() {
+        return homeListFrag;
+    }
 
+    @Override
+    public NotesList getNotesListFrag() {
+        return notesListFrag;
+    }
+
+    @Override
+    public HomeworkList getHomeworkListFrag() {
+        return homeworkListFrag;
+    }
 }

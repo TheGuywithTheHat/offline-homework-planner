@@ -19,7 +19,7 @@ public class HomeList extends Fragment {
     static final String ARG_ARCHIVED = "archived";
 
     private int mColumnCount = 1;
-    private HomeScreen parent;
+    private Parent parent;
     private boolean archived;
 
 
@@ -71,7 +71,7 @@ public class HomeList extends Fragment {
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        recyclerView.setAdapter(new ClassItemRecyclerViewAdapter(parent.getCourses(), parent, archived));
+        recyclerView.setAdapter(new CourseItemRecyclerViewAdapter(parent.getCourses(), parent, archived));
 
         return view;
     }
@@ -81,8 +81,8 @@ public class HomeList extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if (context instanceof HomeScreen) {
-            parent = (HomeScreen)context;
+        if (context instanceof Parent) {
+            parent = (Parent)context;
         }
     }
 

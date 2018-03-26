@@ -18,7 +18,7 @@ public class HomeworkList extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
 
     private int mColumnCount = 1;
-    private HomeScreen parent;
+    private Parent parent;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -75,8 +75,8 @@ public class HomeworkList extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if (context instanceof HomeScreen) {
-            parent = (HomeScreen) context;
+        if (context instanceof Parent) {
+            parent = (Parent) context;
         }
     }
 

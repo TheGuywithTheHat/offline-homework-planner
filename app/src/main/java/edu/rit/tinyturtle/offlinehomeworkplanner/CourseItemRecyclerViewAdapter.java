@@ -14,15 +14,15 @@ import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Course} and makes a call to the
- * specified {@link HomeScreen}.
+ * specified {@link Parent}.
  */
-public class ClassItemRecyclerViewAdapter extends RecyclerView.Adapter<ClassItemRecyclerViewAdapter.ViewHolder> {
+public class CourseItemRecyclerViewAdapter extends RecyclerView.Adapter<CourseItemRecyclerViewAdapter.ViewHolder> {
 
     private final List<Course> mValues;
-    private final HomeScreen parent;
     private final boolean archived;
+    private final Parent parent;
 
-    public ClassItemRecyclerViewAdapter(List<Course> items, HomeScreen parent, boolean archived) {
+    public CourseItemRecyclerViewAdapter(List<Course> items, Parent parent, boolean archived) {
         mValues = new ArrayList<>();
         for (Course item: items){
             if (item.isArchived() == archived){
@@ -37,14 +37,14 @@ public class ClassItemRecyclerViewAdapter extends RecyclerView.Adapter<ClassItem
     public ViewHolder onCreateViewHolder(ViewGroup parentGroup, int viewType) {
         View view = LayoutInflater.from(parentGroup.getContext())
                 .inflate(R.layout.class_list_item, parentGroup, false);
-        final ClassItemRecyclerViewAdapter.ViewHolder viewHolder = new ClassItemRecyclerViewAdapter.ViewHolder(view);
+        final CourseItemRecyclerViewAdapter.ViewHolder viewHolder = new CourseItemRecyclerViewAdapter.ViewHolder(view);
         ImageButton overflow = ((ImageButton) view.findViewById(R.id.class_list_overflow_button));
         overflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
                 int menu = archived? R.menu.archive_overflow : R.menu.class_overflow;
-                popupMenu.getMenuInflater().inflate(R.menu.class_overflow, popupMenu.getMenu());
+                popupMenu.getMenuInflater().inflate(menu, popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
