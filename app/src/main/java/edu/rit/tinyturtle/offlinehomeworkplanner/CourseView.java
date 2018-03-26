@@ -128,4 +128,14 @@ public class CourseView extends Fragment implements Parent {
     public boolean deleteCourse(Course course) {
         return parent.deleteCourse(course);
     }
+
+    @Override
+    public boolean deleteHomework(Homework homework) {
+        return parent.deleteHomework(homework);
+    }
+
+    @Override
+    public boolean deleteNote(Notes notes) {
+        return parent.deleteNote(notes);
+    }
 }
