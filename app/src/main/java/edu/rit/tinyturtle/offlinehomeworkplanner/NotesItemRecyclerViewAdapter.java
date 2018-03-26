@@ -58,7 +58,7 @@ public class NotesItemRecyclerViewAdapter extends RecyclerView.Adapter<NotesItem
         holder.mItem = mValues.get(position);
         holder.mNameView.setText(mValues.get(position).getName());
 
-        View colorSlot = holder.mView.findViewById(R.id.color_rectangle);
+        View colorSlot = holder.mView.findViewById(R.id.background_color_rectangle);
         int color = holder.mItem.getCourse().getColor();
         colorSlot.setBackgroundColor(color);
         holder.mView.setOnClickListener(new View.OnClickListener() {

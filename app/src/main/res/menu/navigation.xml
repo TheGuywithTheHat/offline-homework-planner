@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_homework"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ic_access_time_black_24dp"
         android:title="@string/title_homework" />
 
     <item
@@ -12,7 +12,7 @@
 
     <item
         android:id="@+id/navigation_notes"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/ic_format_list_bulleted_black_24dp"
         android:title="@string/title_notes" />
 
 </menu>

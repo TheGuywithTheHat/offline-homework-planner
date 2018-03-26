@@ -88,7 +88,9 @@ public class CourseItemRecyclerViewAdapter extends RecyclerView.Adapter<CourseIt
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mNameView.setText(mValues.get(position).getName());
-
+        View colorSlot = holder.mView.findViewById(R.id.class_item_box);
+        int color = holder.mItem.getColor();
+        colorSlot.setBackgroundColor(color);
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

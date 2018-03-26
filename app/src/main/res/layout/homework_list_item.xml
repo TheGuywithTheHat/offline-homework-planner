@@ -15,7 +15,7 @@
         android:layout_marginStart="16dp"
         android:textAppearance="?attr/textAppearanceListItem"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/color_rectangle"
+        app:layout_constraintStart_toStartOf="@+id/background_color_rectangle"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -42,7 +42,7 @@
         app:srcCompat="@drawable/ic_more_vert_black_24dp" />
 
     <View
-        android:id="@+id/color_rectangle"
+        android:id="@+id/background_color_rectangle"
         android:layout_width="8dp"
         android:layout_height="0dp"
         android:background="@color/colorAccent"

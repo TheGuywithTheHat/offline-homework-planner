@@ -15,7 +15,7 @@ public class SwipeHelper  extends ItemTouchHelper.SimpleCallback{
     }
 
     public SwipeHelper(HomeworkItemRecyclerViewAdapter adapter){
-        super(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
+        super(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         this.adapter = adapter;
     }
     @Override
