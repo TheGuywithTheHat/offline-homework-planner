@@ -20,6 +20,7 @@ public class ClassItemRecyclerViewAdapter extends RecyclerView.Adapter<ClassItem
 
     private final List<Course> mValues;
     private final HomeScreen parent;
+    private final boolean archived;
 
     public ClassItemRecyclerViewAdapter(List<Course> items, HomeScreen parent, boolean archived) {
         mValues = new ArrayList<>();
@@ -28,6 +29,7 @@ public class ClassItemRecyclerViewAdapter extends RecyclerView.Adapter<ClassItem
                 mValues.add(item);
             }
         }
+        this.archived = archived;
         this.parent = parent;
     }
 
@@ -41,6 +43,7 @@ public class ClassItemRecyclerViewAdapter extends RecyclerView.Adapter<ClassItem
             @Override
             public void onClick(View view) {
                 PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
+                int menu = archived? R.menu.archive_overflow : R.menu.class_overflow;
                 popupMenu.getMenuInflater().inflate(R.menu.class_overflow, popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
@@ -56,6 +59,14 @@ public class ClassItemRecyclerViewAdapter extends RecyclerView.Adapter<ClassItem
                                 return true;
                             case R.id.class_overflow_delete:
                                 parent.deleteCourse(viewHolder.mItem);
+                                parent.openFragment(new HomeList());
+                                return true;
+                            case R.id.archive_overflow_delete:
+                                parent.deleteCourse(viewHolder.mItem);
+                                parent.openFragment(new HomeList());
+                                return true;
+                            case R.id.archive_overflow_unarchive:
+                                viewHolder.mItem.setArchived(false);
                                 parent.openFragment(new HomeList());
                                 return true;
                         }

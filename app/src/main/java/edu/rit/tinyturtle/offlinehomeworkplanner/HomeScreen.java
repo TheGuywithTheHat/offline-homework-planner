@@ -4,12 +4,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ public class HomeScreen extends AppCompatActivity {
 
     FragmentManager fragmentManager;
     HomeList homeListFrag;
+    HomeList archiveListFrag;
     NotesList notesListFrag;
     HomeworkList homeworkListFrag;
 
@@ -27,6 +30,7 @@ public class HomeScreen extends AppCompatActivity {
     List<Homework> homeworks;
     List<Notes> notes;
     private DrawerLayout mDrawerLayout;
+    private NavigationView mNavigationView;
     private ActionBarDrawerToggle mToggle;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -48,6 +52,25 @@ public class HomeScreen extends AppCompatActivity {
             return false;
         }
     };
+    private NavigationView.OnNavigationItemSelectedListener mOnNavigationDrawerItemSelectedListener
+            = new NavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.navigation_drawer_archives:
+                    openFragment(archiveListFrag);
+                    mDrawerLayout.closeDrawer(Gravity.START, true);
+                    mNavigationView.setSelected(false);
+                    return true;
+                case R.id.navigation_drawer_settings:
+                    openFragment(notesListFrag);
+                    mDrawerLayout.closeDrawer(Gravity.START, true);
+                    return true;
+            }
+            return false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +78,10 @@ public class HomeScreen extends AppCompatActivity {
         setContentView(R.layout.activity_home_screen);
         fragmentManager = getSupportFragmentManager();
         homeListFrag = new HomeList();
+        archiveListFrag = new HomeList();
+        Bundle args = new Bundle();
+        args.putBoolean(HomeList.ARG_ARCHIVED, true);
+        archiveListFrag.setArguments(args);
         homeworkListFrag = new HomeworkList();
         notesListFrag = new NotesList();
         courses = new ArrayList<>();
@@ -70,16 +97,17 @@ public class HomeScreen extends AppCompatActivity {
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        BottomNavigationView navigation = findViewById(R.id.navigation_drawer_settings);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
+        mNavigationView.setNavigationItemSelectedListener(mOnNavigationDrawerItemSelectedListener);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation_drawer_settings);
+        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mToggle.onOptionsItemSelected(item)){
-
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -90,6 +118,7 @@ public class HomeScreen extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
 
     public List<Course> getCourses() {
         return courses;

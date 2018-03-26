@@ -16,9 +16,11 @@ import android.view.ViewGroup;
  */
 public class HomeList extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
+    static final String ARG_ARCHIVED = "archived";
 
     private int mColumnCount = 1;
     private HomeScreen parent;
+    private boolean archived;
 
 
     /**
@@ -26,6 +28,7 @@ public class HomeList extends Fragment {
      * fragment (e.g. upon screen orientation changes).
      */
     public HomeList() {
+        archived = false;
     }
 
     // TODO: Customize parameter initialization
@@ -44,6 +47,7 @@ public class HomeList extends Fragment {
 
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            archived = getArguments().getBoolean(ARG_ARCHIVED);
         }
     }
 
@@ -67,7 +71,7 @@ public class HomeList extends Fragment {
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        recyclerView.setAdapter(new ClassItemRecyclerViewAdapter(parent.getCourses(), parent, false));
+        recyclerView.setAdapter(new ClassItemRecyclerViewAdapter(parent.getCourses(), parent, archived));
 
         return view;
     }
