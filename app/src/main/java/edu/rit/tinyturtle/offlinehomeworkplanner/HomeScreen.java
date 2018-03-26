@@ -22,13 +22,8 @@ public class HomeScreen extends AppCompatActivity implements Parent {
     private FragmentManager fragmentManager;
     private HomeList homeListFrag;
     private NotesList notesListFrag;
+    private HomeList archiveListFrag;
     private HomeworkList homeworkListFrag;
-
-    FragmentManager fragmentManager;
-    HomeList homeListFrag;
-    HomeList archiveListFrag;
-    NotesList notesListFrag;
-    HomeworkList homeworkListFrag;
 
     List<Course> courses;
     List<Homework> homeworks;

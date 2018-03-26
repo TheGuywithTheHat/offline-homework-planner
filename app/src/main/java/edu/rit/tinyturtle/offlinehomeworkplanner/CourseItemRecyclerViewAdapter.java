@@ -1,5 +1,6 @@
 package edu.rit.tinyturtle.offlinehomeworkplanner;
 
+import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -67,7 +68,11 @@ public class CourseItemRecyclerViewAdapter extends RecyclerView.Adapter<CourseIt
                                 return true;
                             case R.id.archive_overflow_unarchive:
                                 viewHolder.mItem.setArchived(false);
-                                parent.openFragment(new HomeList());
+                                HomeList homeList = new HomeList();
+                                Bundle args = new Bundle();
+                                args.putBoolean(HomeList.ARG_ARCHIVED, true);
+                                homeList.setArguments(args);
+                                parent.openFragment(homeList);
                                 return true;
                         }
                         return false;
