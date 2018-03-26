@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -27,7 +28,7 @@ import java.util.Date;
  * Use the {@link CreateCourse#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CreateCourse extends Fragment implements ColorPickerCallback {
+public class CreateCourse extends OnTouchHideFragment implements ColorPickerCallback{
     static final String TAG = "create_course";
     private static final String ARG_COURSE = "course";
     private static final int[] DAY_BUTTONS = {R.id.sun_button, R.id.mon_button,
@@ -103,6 +104,8 @@ public class CreateCourse extends Fragment implements ColorPickerCallback {
             EditText editText = ((EditText) view.findViewById(i));
             editText.setOnFocusChangeListener(focusOrClickListener);
             editText.setOnClickListener(focusOrClickListener);
+            editText.setOnTouchListener(this);
+            view.setOnTouchListener(this);
 
         }
         View.OnClickListener colorPickerClickListener = new View.OnClickListener() {
@@ -117,8 +120,13 @@ public class CreateCourse extends Fragment implements ColorPickerCallback {
         colorView = (View) view.findViewById(R.id.color_rectangle);
         pickerButton.setOnClickListener(colorPickerClickListener);
         colorView.setOnClickListener(colorPickerClickListener);
-
-        view.findViewById(R.id.create_course_save_button).setOnClickListener(new View.OnClickListener() {
+        colorView.setOnTouchListener(this);
+        for (int i = 0; i < DAY_BUTTONS.length; i++) {
+            view.findViewById(DAY_BUTTONS[i]).setOnTouchListener(this);
+        }
+        Button saveButton = view.findViewById(R.id.create_course_save_button);
+        saveButton.setOnTouchListener(this);
+        saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
                 try{
@@ -198,6 +206,7 @@ public class CreateCourse extends Fragment implements ColorPickerCallback {
             ((ToggleButton) view.findViewById(DAY_BUTTONS[i])).setChecked(values[i]);
         }
     }
+
 
 
 }

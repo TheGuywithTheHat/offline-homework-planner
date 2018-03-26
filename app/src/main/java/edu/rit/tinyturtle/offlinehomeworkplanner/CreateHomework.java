@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -31,7 +32,7 @@ import java.util.Locale;
  * Use the {@link CreateHomework#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CreateHomework extends Fragment implements AdapterView.OnItemSelectedListener, TimePickerDialog.OnTimeSetListener {
+public class CreateHomework extends OnTouchHideFragment implements AdapterView.OnItemSelectedListener, TimePickerDialog.OnTimeSetListener {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_HOMEWORK = "homework";
     private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
@@ -102,6 +103,8 @@ public class CreateHomework extends Fragment implements AdapterView.OnItemSelect
         dateButton.setOnClickListener(dateClickListener);
         editDate.setOnFocusChangeListener(dateClickListener);
         editDate.setOnClickListener(dateClickListener);
+        editDate.setOnTouchListener(this);
+        dateButton.setOnTouchListener(this);
 
 
         spinner = (Spinner) view.findViewById(R.id.homework_create_course);
@@ -121,7 +124,10 @@ public class CreateHomework extends Fragment implements AdapterView.OnItemSelect
         spinner.setAdapter(adapter);
         spinner.setSelection(adapter.getCount()-1);
         spinner.setOnItemSelectedListener(this);
-        view.findViewById(R.id.homework_create_save).setOnClickListener(new View.OnClickListener() {
+        spinner.setOnTouchListener(this);
+        Button saveButton = view.findViewById(R.id.homework_create_save);
+        saveButton.setOnTouchListener(this);
+        saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String dueDate = ((EditText) (view.findViewById(R.id.homework_create_due_date))).getText().toString();
                 SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
@@ -149,6 +155,7 @@ public class CreateHomework extends Fragment implements AdapterView.OnItemSelect
                 spinner.setSelection(adapter.getPosition(homework.getCourse().getName()));
             }
         }
+        view.setOnTouchListener(this);
         return view;
     }
 

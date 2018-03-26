@@ -13,12 +13,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-public class HomeScreen extends AppCompatActivity implements Parent {
+public class HomeScreen extends AppCompatActivity implements Parent, View.OnTouchListener {
     private FragmentManager fragmentManager;
     private HomeList homeListFrag;
     private NotesList notesListFrag;
@@ -100,6 +103,11 @@ public class HomeScreen extends AppCompatActivity implements Parent {
         mNavigationView.setNavigationItemSelectedListener(mOnNavigationDrawerItemSelectedListener);
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation_drawer_settings);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+        findViewById(R.id.navigation_home).setOnTouchListener(this);
+        findViewById(R.id.navigation_homework).setOnTouchListener(this);
+        findViewById(R.id.navigation_notes).setOnTouchListener(this);
+
 
     }
 
@@ -175,5 +183,12 @@ public class HomeScreen extends AppCompatActivity implements Parent {
     @Override
     public HomeworkList getHomeworkListFrag() {
         return homeworkListFrag;
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        return false;
     }
 }
