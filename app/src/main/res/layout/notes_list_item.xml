@@ -31,8 +31,7 @@
     <View
         android:id="@+id/background_color_rectangle"
         android:layout_width="8dp"
-        android:layout_height="0dp"
-        android:background="@color/colorAccent" />
+        android:layout_height="0dp" />
 
     <ImageButton
         android:id="@+id/notes_list_overflow_button"

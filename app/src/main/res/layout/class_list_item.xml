@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="48dp"
     android:alpha="1"
-    android:background="@color/colorAccent"
     android:orientation="horizontal">
 
     <View
