@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -20,7 +21,7 @@ import java.util.List;
  * Use the {@link CreateNotes#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CreateNotes extends Fragment implements AdapterView.OnItemSelectedListener{
+public class CreateNotes extends OnTouchHideFragment implements AdapterView.OnItemSelectedListener{
     private static final String ARG_NOTES = "notes";
 
     private Notes notes;
@@ -79,7 +80,10 @@ public class CreateNotes extends Fragment implements AdapterView.OnItemSelectedL
         spinner.setAdapter(adapter);
         spinner.setSelection(adapter.getCount()-1);
         spinner.setOnItemSelectedListener(this);
-        view.findViewById(R.id.create_notes_save_button).setOnClickListener(new View.OnClickListener() {
+        spinner.setOnTouchListener(this);
+        Button saveButton = view.findViewById(R.id.create_notes_save_button);
+        saveButton.setOnTouchListener(this);
+        saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(notes == null) {
                     notes = new Notes();
@@ -101,6 +105,7 @@ public class CreateNotes extends Fragment implements AdapterView.OnItemSelectedL
             }
 
         }
+        view.setOnTouchListener(this);
 
         return view;
     }

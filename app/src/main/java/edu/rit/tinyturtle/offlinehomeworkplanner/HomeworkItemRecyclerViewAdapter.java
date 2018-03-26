@@ -25,6 +25,12 @@ public class HomeworkItemRecyclerViewAdapter extends RecyclerView.Adapter<Homewo
         this.parent = parent;
     }
 
+    public void completeHomework(int pos){
+        Homework h = mValues.get(pos);
+        h.setCompleted(true);
+        parent.openFragment(new HomeworkList());
+
+    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parentGroup, int viewType) {
         View view = LayoutInflater.from(parentGroup.getContext())

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,8 +66,11 @@ public class HomeworkList extends Fragment {
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        recyclerView.setAdapter(new HomeworkItemRecyclerViewAdapter(parent.getHomeworks(), parent));
-
+        HomeworkItemRecyclerViewAdapter adapter = new HomeworkItemRecyclerViewAdapter(parent.getHomeworks(), parent);
+        recyclerView.setAdapter(adapter);
+        ItemTouchHelper.Callback callback = new SwipeHelper(adapter);
+        ItemTouchHelper helper = new ItemTouchHelper(callback);
+        helper.attachToRecyclerView(recyclerView);
         return view;
     }
 
