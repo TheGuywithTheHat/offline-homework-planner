@@ -30,10 +30,9 @@ import java.util.Date;
 public class NotesPage extends Fragment {
     private static final String ARG_NOTES = "notes";
 
-
     private Notes notes;
 
-    private HomeScreen parent;
+    private Parent parent;
 
     public NotesPage() {
         // Required empty public constructor
@@ -83,8 +82,8 @@ public class NotesPage extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof HomeScreen) {
-            parent = (HomeScreen) context;
+        if (context instanceof Parent) {
+            parent = (Parent) context;
         }
     }
 

@@ -16,18 +16,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-public class HomeScreen extends AppCompatActivity {
+public class HomeScreen extends AppCompatActivity implements Parent {
+    private FragmentManager fragmentManager;
+    private HomeList homeListFrag;
+    private NotesList notesListFrag;
+    private HomeworkList homeworkListFrag;
 
-    FragmentManager fragmentManager;
-    HomeList homeListFrag;
-    NotesList notesListFrag;
-    HomeworkList homeworkListFrag;
-
-    List<Course> courses;
-    List<Homework> homeworks;
-    List<Notes> notes;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
+
+    private List<Course> courses;
+    private List<Homework> homeworks;
+    private List<Notes> notes;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -128,5 +128,15 @@ public class HomeScreen extends AppCompatActivity {
         return notes.remove(n);
     }
 
+    public HomeList getHomeListFrag() {
+        return homeListFrag;
+    }
 
+    public NotesList getNotesListFrag() {
+        return notesListFrag;
+    }
+
+    public HomeworkList getHomeworkListFrag() {
+        return homeworkListFrag;
+    }
 }
