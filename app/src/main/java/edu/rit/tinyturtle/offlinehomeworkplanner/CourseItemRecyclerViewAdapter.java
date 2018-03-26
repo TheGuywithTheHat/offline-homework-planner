@@ -95,7 +95,7 @@ public class CourseItemRecyclerViewAdapter extends RecyclerView.Adapter<CourseIt
                 if (null != parent) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    parent.openFragment(CreateCourse.newInstance(holder.mItem));
+                    parent.openFragment(CourseView.newInstance(holder.mItem));
                 }
             }
         });
