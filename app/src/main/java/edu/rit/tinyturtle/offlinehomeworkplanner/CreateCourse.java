@@ -117,7 +117,7 @@ public class CreateCourse extends OnTouchHideFragment implements ColorPickerCall
             }
         };
         ImageButton pickerButton = (ImageButton) view.findViewById(R.id.color_picker_button);
-        colorView = (View) view.findViewById(R.id.color_rectangle);
+        colorView = (View) view.findViewById(R.id.background_color_rectangle);
         pickerButton.setOnClickListener(colorPickerClickListener);
         colorView.setOnClickListener(colorPickerClickListener);
         colorView.setOnTouchListener(this);
@@ -152,7 +152,7 @@ public class CreateCourse extends OnTouchHideFragment implements ColorPickerCall
 
         if(null != course) {
             ((EditText) view.findViewById(R.id.course_create_name)).setText(course.getName());
-            ((View) view.findViewById(R.id.color_rectangle)).setBackgroundColor(course.getColor());
+            ((View) view.findViewById(R.id.background_color_rectangle)).setBackgroundColor(course.getColor());
             ((EditText) view.findViewById(R.id.course_create_start)).setText(course.getStart());
             ((EditText) view.findViewById(R.id.course_create_end)).setText(course.getEnd());
             setDays(view, course.getDays());

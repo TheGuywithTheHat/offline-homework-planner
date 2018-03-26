@@ -129,6 +129,11 @@ public class CreateHomework extends OnTouchHideFragment implements AdapterView.O
         saveButton.setOnTouchListener(this);
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                String title = ((EditText) view.findViewById(R.id.homework_create_title)).getText().toString();
+                if (title.equals("")){
+                    Toast.makeText(getContext(), R.string.invalid_title, Toast.LENGTH_LONG).show();
+                    return;
+                }
                 String dueDate = ((EditText) (view.findViewById(R.id.homework_create_due_date))).getText().toString();
                 SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
                 try {

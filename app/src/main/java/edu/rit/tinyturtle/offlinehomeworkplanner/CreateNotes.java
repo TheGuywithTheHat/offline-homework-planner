@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,12 +86,17 @@ public class CreateNotes extends OnTouchHideFragment implements AdapterView.OnIt
         saveButton.setOnTouchListener(this);
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                String title = ((EditText) view.findViewById(R.id.notes_create_title)).getText().toString();
+                if (title.equals("")){
+                    Toast.makeText(getContext(), R.string.invalid_title, Toast.LENGTH_LONG).show();
+                    return;
+                }
                 if(notes == null) {
                     notes = new Notes();
                     parent.getNotes().add(notes);
                 }
 
-                notes.setName(((EditText)(view.findViewById(R.id.notes_create_name))).getText().toString());
+                notes.setName(((EditText)(view.findViewById(R.id.notes_create_title))).getText().toString());
                 notes.setCourse(course);
                 parent.openFragment(NotesPage.newInstance(notes));
             }
@@ -101,7 +107,7 @@ public class CreateNotes extends OnTouchHideFragment implements AdapterView.OnIt
 
         if(notes != null) {
             if(notes.getCourse() != null) {
-                ((EditText) view.findViewById(R.id.notes_create_name)).setText(notes.getName());
+                ((EditText) view.findViewById(R.id.notes_create_title)).setText(notes.getName());
             }
 
         }

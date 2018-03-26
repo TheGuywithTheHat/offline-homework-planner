@@ -70,9 +70,12 @@ public class HomeworkItemRecyclerViewAdapter extends RecyclerView.Adapter<Homewo
         holder.mNameView.setText(mValues.get(position).getName());
         holder.mDueDateView.setText(mValues.get(position).getDueDate());
 
-        View colorSlot = holder.mView.findViewById(R.id.color_rectangle);
-        int color = holder.mItem.getCourse().getColor();
-        colorSlot.setBackgroundColor(color);
+        View colorSlot = holder.mView.findViewById(R.id.background_color_rectangle);
+        Course course = holder.mItem.getCourse();
+        if (course != null) {
+            int color = course.getColor();
+            colorSlot.setBackgroundColor(color);
+        }
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
