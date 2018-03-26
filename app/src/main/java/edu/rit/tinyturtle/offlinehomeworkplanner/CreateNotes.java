@@ -61,7 +61,7 @@ public class CreateNotes extends Fragment {
                 }
 
                 notes.setName(((EditText)(view.findViewById(R.id.notes_create_name))).getText().toString());
-                parent.openFragment(parent.getNotesListFrag()); //TODO: change to new notes page
+                parent.openFragment(NotesPage.newInstance(notes));
             }
         });
 

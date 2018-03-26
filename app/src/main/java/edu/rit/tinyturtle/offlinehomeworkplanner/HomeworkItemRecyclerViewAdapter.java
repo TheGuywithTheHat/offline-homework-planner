@@ -23,10 +23,11 @@ public class HomeworkItemRecyclerViewAdapter extends RecyclerView.Adapter<Homewo
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.homework_list_item, parent, false);
-        return new ViewHolder(view);
+    public ViewHolder onCreateViewHolder(ViewGroup parentGroup, int viewType) {
+        View view = LayoutInflater.from(parentGroup.getContext())
+                .inflate(R.layout.homework_list_item, parentGroup, false);
+        ViewHolder viewHolder = new ViewHolder(view);
+        return viewHolder;
     }
 
     @Override
@@ -35,6 +36,9 @@ public class HomeworkItemRecyclerViewAdapter extends RecyclerView.Adapter<Homewo
         holder.mNameView.setText(mValues.get(position).getName());
         holder.mDueDateView.setText(mValues.get(position).getDueDate());
 
+        View colorSlot = holder.mView.findViewById(R.id.color_rectangle);
+        int color = holder.mItem.getCourse().getColor();
+        colorSlot.setBackgroundColor(color);
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

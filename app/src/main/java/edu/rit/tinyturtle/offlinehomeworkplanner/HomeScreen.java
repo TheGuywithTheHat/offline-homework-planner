@@ -1,11 +1,12 @@
 package edu.rit.tinyturtle.offlinehomeworkplanner;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
@@ -51,7 +52,10 @@ public class HomeScreen extends AppCompatActivity implements Parent {
         homeworkListFrag = new HomeworkList();
         notesListFrag = new NotesList();
         courses = new ArrayList<>();
+        courses.add(new Course("default", "09:00 AM", "10:00 AM",
+                new boolean[] {false, true, false, true, false, true, false}, Color.MAGENTA));
         homeworks = new ArrayList<>();
+        homeworks.add(new Homework("default hw","03/30/2018", courses.get(0),  false));
         notes = new ArrayList<>();
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
@@ -68,6 +72,10 @@ public class HomeScreen extends AppCompatActivity implements Parent {
 
     public List<Course> getCourses() {
         return courses;
+    }
+
+    public boolean deleteCourse(Course c){
+        return courses.remove(c);
     }
 
     public List<Homework> getHomeworks() {

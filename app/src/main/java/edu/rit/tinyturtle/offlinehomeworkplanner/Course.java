@@ -1,23 +1,26 @@
 package edu.rit.tinyturtle.offlinehomeworkplanner;
 
 import java.io.Serializable;
-import java.time.LocalTime;
 
 public class Course implements Serializable {
     private String name;
-    private LocalTime start;
-    private LocalTime end;
+    private String start;
+    private String end;
     private boolean[] days;
+    private int colorHex;
+    private boolean archived;
 
     public Course() {
-
+        this.archived = false;
     }
 
-    public Course(String name, LocalTime start, LocalTime end, boolean[] days) {
+    public Course(String name, String start, String end, boolean[] days, int colorHex) {
         this.name = name;
         this.start = start;
         this.end = end;
         this.days = days;
+        this.archived = false;
+        this.colorHex = colorHex;
     }
 
     public String getName() {
@@ -28,19 +31,19 @@ public class Course implements Serializable {
         this.name = name;
     }
 
-    public LocalTime getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(LocalTime start) {
+    public void setStart(String start) {
         this.start = start;
     }
 
-    public LocalTime getEnd() {
+    public String getEnd() {
         return end;
     }
 
-    public void setEnd(LocalTime end) {
+    public void setEnd(String end) {
         this.end = end;
     }
 
@@ -58,5 +61,22 @@ public class Course implements Serializable {
 
     public void setDay(int i, boolean b) {
         this.days[i] = b;
+    }
+
+    public int getColor() {
+        return colorHex;
+    }
+
+    public void setColor(int colorHex) {
+        this.colorHex = colorHex;
+    }
+
+
+    public boolean isArchived() {
+        return archived;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
     }
 }

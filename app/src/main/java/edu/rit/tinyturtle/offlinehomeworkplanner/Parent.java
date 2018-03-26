@@ -23,4 +23,5 @@ public interface Parent {
     HomeList getHomeListFrag();
     NotesList getNotesListFrag();
     HomeworkList getHomeworkListFrag();
+    boolean deleteCourse(Course course);
 }

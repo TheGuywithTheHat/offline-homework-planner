@@ -123,4 +123,9 @@ public class CourseView extends Fragment implements Parent {
     public HomeworkList getHomeworkListFrag() {
         return parent.getHomeworkListFrag();
     }
+
+    @Override
+    public boolean deleteCourse(Course course) {
+        return parent.deleteCourse(course);
+    }
 }
