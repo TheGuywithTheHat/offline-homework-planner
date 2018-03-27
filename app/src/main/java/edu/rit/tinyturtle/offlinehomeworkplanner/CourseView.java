@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -96,8 +97,11 @@ public class CourseView extends Fragment implements Parent {
 
     @Override
     public void openFragment(Fragment fragment) {
-        parent.openFragment(fragment);
-    }
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.course_view_frame_layout, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();    }
 
     @Override
     public List<Course> getCourses() {

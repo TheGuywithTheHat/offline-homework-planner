@@ -80,8 +80,16 @@ public class CourseHomeworkTab extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        List<Fragment> l = getFragmentManager().getFragments();
+        Parent f = (Parent) context;
+        for (Fragment frag: l){
+            if (frag.getClass() == CourseView.class){
+                f = (Parent) frag;
+                break;
+            }
+        }
         if (context instanceof Parent) {
-            parent = (Parent) context;
+            parent = f;
         }
     }
 
