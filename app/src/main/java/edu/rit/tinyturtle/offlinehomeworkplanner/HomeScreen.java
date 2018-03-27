@@ -33,6 +33,7 @@ public class HomeScreen extends AppCompatActivity implements Parent, View.OnTouc
     List<Notes> notes;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
+    private BottomNavigationView mBottomNavigationView;
     private ActionBarDrawerToggle mToggle;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -42,13 +43,13 @@ public class HomeScreen extends AppCompatActivity implements Parent, View.OnTouc
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    openFragment(homeListFrag);
+                    openFragmentTransaction(homeListFrag);
                     return true;
                 case R.id.navigation_notes:
-                    openFragment(notesListFrag);
+                    openFragmentTransaction(notesListFrag);
                     return true;
                 case R.id.navigation_homework:
-                    openFragment(homeworkListFrag);
+                    openFragmentTransaction(homeworkListFrag);
                     return true;
             }
             return false;
@@ -101,9 +102,9 @@ public class HomeScreen extends AppCompatActivity implements Parent, View.OnTouc
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
         mNavigationView.setNavigationItemSelectedListener(mOnNavigationDrawerItemSelectedListener);
-        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation_drawer_settings);
-        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+        mBottomNavigationView = findViewById(R.id.navigation_drawer_settings);
+        mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        mBottomNavigationView.setSelectedItemId(R.id.navigation_home);
         findViewById(R.id.navigation_home).setOnTouchListener(this);
         findViewById(R.id.navigation_homework).setOnTouchListener(this);
         findViewById(R.id.navigation_notes).setOnTouchListener(this);
@@ -119,11 +120,23 @@ public class HomeScreen extends AppCompatActivity implements Parent, View.OnTouc
         return super.onOptionsItemSelected(item);
     }
 
-    public void openFragment(Fragment fragment) {
+    private void openFragmentTransaction(Fragment fragment) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.main_frag_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    public void openFragment(Fragment fragment) {
+        if (fragment.getClass() == HomeList.class){
+            mBottomNavigationView.setSelectedItemId(R.id.navigation_home);
+        } else if ((fragment.getClass() == HomeworkList.class)){
+            mBottomNavigationView.setSelectedItemId(R.id.navigation_homework);
+        } else if ((fragment.getClass() == NotesList.class)){
+            mBottomNavigationView.setSelectedItemId(R.id.navigation_notes);
+        } else {
+            openFragmentTransaction(fragment);
+        }
     }
 
 

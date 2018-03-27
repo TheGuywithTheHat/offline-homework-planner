@@ -17,6 +17,7 @@
     </style>
     <style name="TabWidgetTheme" parent="AppTheme">
         <item name="android:textColorPrimary">@color/whiteFullOpacity</item>
+        <item name="android:textColorSecondary">@color/whiteMostOpacity</item>
 
 
     </style>

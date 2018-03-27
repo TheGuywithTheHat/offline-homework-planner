@@ -2,11 +2,12 @@ package edu.rit.tinyturtle.offlinehomeworkplanner;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TabHost;
 
 import java.util.List;
 
@@ -23,6 +24,8 @@ public class CourseView extends Fragment implements Parent {
     private Course course;
 
     private Parent parent;
+    private SectionsPageAdapter mSectionsPageAdapter;
+    private ViewPager mViewPager;
 
     public CourseView() {
         // Required empty public constructor
@@ -54,25 +57,27 @@ public class CourseView extends Fragment implements Parent {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_class_view, container, false);
+        mSectionsPageAdapter = new SectionsPageAdapter(getActivity().getSupportFragmentManager());
+        mViewPager = (ViewPager) view.findViewById(R.id.course_view_pager);
+        setupViewPager(mViewPager);
+        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.course_view_tabs);
+        tabLayout.setupWithViewPager(mViewPager);
 
-        TabHost host = (TabHost)view.findViewById(R.id.course_tab_host);
-        host.setup();
 
-        //HW tab
-        TabHost.TabSpec spec = host.newTabSpec(getString(R.string.title_homework));
-        spec.setContent(R.id.homework_tab);
-        spec.setIndicator(getString(R.string.title_homework));
-        host.addTab(spec);
 
-        //Notes tab
-        spec = host.newTabSpec(getString(R.string.title_notes));
-        spec.setContent(R.id.notes_tab);
-        spec.setIndicator(getString(R.string.title_notes));
-        host.addTab(spec);
 
         return view;
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        CourseHomeworkTab homeworkTab = CourseHomeworkTab.newInstance(course);
+        CourseNotesTab notesTab = CourseNotesTab.newInstance(course);
+        mSectionsPageAdapter.addFragment(homeworkTab, getResources().getString(R.string.title_homework));
+        mSectionsPageAdapter.addFragment(notesTab, getResources().getString(R.string.title_notes));
+        viewPager.setAdapter(mSectionsPageAdapter);
     }
 
     @Override
