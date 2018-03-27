@@ -3,6 +3,7 @@
     android:id="@+id/course_tab_host"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/TabWidgetTheme"
     tools:context="edu.rit.tinyturtle.offlinehomeworkplanner.CourseView">
 
     <LinearLayout
@@ -13,7 +14,8 @@
         <TabWidget
             android:id="@android:id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"/>
 
         <FrameLayout
             android:id="@android:id/tabcontent"
