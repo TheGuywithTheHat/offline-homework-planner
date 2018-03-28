@@ -58,7 +58,8 @@ public class CourseHomeworkTab extends Fragment {
         List<Homework> homeworkList = new ArrayList<>(parent.getHomeworks());
         ListIterator<Homework> hIter = homeworkList.listIterator();
         while (hIter.hasNext()) {
-            if (hIter.next().getCourse() != course)
+            Homework h = hIter.next();
+            if (h.getCourse() != course || h.isCompleted())
                 hIter.remove();
         }
         HomeworkItemRecyclerViewAdapter adapter = new HomeworkItemRecyclerViewAdapter(homeworkList, parent, false);

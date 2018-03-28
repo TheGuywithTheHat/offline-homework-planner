@@ -8,10 +8,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
+import java.util.ListIterator;
 
 
 /**
@@ -54,6 +58,7 @@ public class CourseView extends Fragment implements Parent {
         if (getArguments() != null) {
             course = (Course)getArguments().getSerializable(ARG_COURSE);
         }
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -81,6 +86,30 @@ public class CourseView extends Fragment implements Parent {
 
 
         return view;
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+        menuInflater.inflate(R.menu.due_menu, menu);
+        super.onCreateOptionsMenu(menu, menuInflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        completeAllHomeworks();
+        parent.openFragment(CourseView.newInstance(course));
+        return super.onOptionsItemSelected(menuItem);
+    }
+
+    private void completeAllHomeworks(){
+        List<Homework> homeworkList = parent.getHomeworks();
+        ListIterator<Homework> hIter = homeworkList.listIterator();
+        while (hIter.hasNext()) {
+            Homework h = hIter.next();
+            if (h.getCourse() == course)
+                h.setCompleted(true);
+        }
     }
 
     private void setupViewPager(ViewPager viewPager) {

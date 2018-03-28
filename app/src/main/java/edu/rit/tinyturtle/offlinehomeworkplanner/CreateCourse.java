@@ -79,7 +79,7 @@ public class CreateCourse extends OnTouchHideFragment implements ColorPickerCall
 
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_create_course, container, false);
-        colorHex = getResources().getColor(R.color.colorAccent);
+        colorHex = (course != null) ? course.getColor() : getResources().getColor(R.color.colorAccent);
         for (final int i: new int[] {R.id.course_create_start, R.id.course_create_end}) {
             OnFocusOrClickListener focusOrClickListener = new OnFocusOrClickListener() {
                 @Override

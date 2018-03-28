@@ -40,4 +40,6 @@
     <string name="completed_homework">Completed Homework</string>
     <string name="uncomplete">Uncomplete</string>
     <string name="saved_message">Notes are autosaved upon closing, although this button manually saves just in case</string>
+    <string name="delete_all">Delete Completed Homework</string>
+    <string name="complete_all">Complete All Homework</string>
 </resources>

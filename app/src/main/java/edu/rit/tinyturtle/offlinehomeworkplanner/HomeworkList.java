@@ -8,6 +8,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -48,6 +51,7 @@ public class HomeworkList extends Fragment {
         if (getArguments() != null) {
             completed = getArguments().getBoolean(ARG_COMPLETED);
         }
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -84,6 +88,46 @@ public class HomeworkList extends Fragment {
         return view;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+        int menuId = completed ? R.menu.complete_menu : R.menu.due_menu;
+        menuInflater.inflate(menuId, menu);
+        super.onCreateOptionsMenu(menu, menuInflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.menu_complete:
+                completeAllHomeworks();
+                parent.openFragment(HomeworkList.newInstance(completed));
+                return true;
+            case R.id.menu_delete:
+                deleteAllHomeworks();
+                parent.openFragment(HomeworkList.newInstance(completed));
+
+                return true;
+        }
+        return false;
+    }
+
+    private void completeAllHomeworks(){
+        List<Homework> homeworkList = parent.getHomeworks();
+        ListIterator<Homework> hIter = homeworkList.listIterator();
+        while (hIter.hasNext()) {
+           hIter.next().setCompleted(true);
+        }
+    }
+
+    private void deleteAllHomeworks(){
+        List<Homework> homeworkList = parent.getHomeworks();
+        ListIterator<Homework> hIter = homeworkList.listIterator();
+        while (hIter.hasNext()) {
+            if (hIter.next().isCompleted()) {
+                hIter.remove();
+            }
+        }
+    }
 
     @Override
     public void onAttach(Context context) {

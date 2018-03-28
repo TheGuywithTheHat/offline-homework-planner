@@ -8,9 +8,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,6 +27,8 @@ public class CourseItemRecyclerViewAdapter extends RecyclerView.Adapter<CourseIt
     private final List<Course> mValues;
     private final boolean archived;
     private final Parent parent;
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
+
 
     public CourseItemRecyclerViewAdapter(List<Course> items, Parent parent, boolean archived) {
         mValues = new ArrayList<>();
@@ -101,6 +108,16 @@ public class CourseItemRecyclerViewAdapter extends RecyclerView.Adapter<CourseIt
                 }
             }
         });
+        ImageView clock = ((ImageView) holder.mView.findViewById(R.id.course_blank_time));
+        try {
+            Date d = sdf.parse(holder.mItem.getStart());
+            Calendar c = Calendar.getInstance();
+            c.setTime(d);
+            float hours = (c.get(Calendar.HOUR_OF_DAY) + c.get(Calendar.MINUTE)/60f)%12;
+            clock.setRotation((hours*360)/12);
+        } catch (ParseException e) {
+            clock.setVisibility(View.GONE);
+        }
     }
 
     @Override
