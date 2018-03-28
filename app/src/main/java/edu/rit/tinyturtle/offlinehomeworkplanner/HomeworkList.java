@@ -18,7 +18,7 @@ import java.util.ListIterator;
 /**
  * A fragment representing a list of Items.
  */
-public class HomeworkList extends Fragment {
+public class HomeworkList extends Fragment implements Titleable {
     private static final String ARG_COMPLETED = "completed";
 
     private boolean completed;
@@ -81,6 +81,9 @@ public class HomeworkList extends Fragment {
         ItemTouchHelper.Callback callback = new SwipeHelper(adapter);
         ItemTouchHelper helper = new ItemTouchHelper(callback);
         helper.attachToRecyclerView(recyclerView);
+
+        parent.changeTitle(getTitle());
+
         return view;
     }
 
@@ -98,5 +101,10 @@ public class HomeworkList extends Fragment {
     public void onDetach() {
         super.onDetach();
         parent = null;
+    }
+
+    @Override
+    public String getTitle() {
+        return "Homework items";
     }
 }

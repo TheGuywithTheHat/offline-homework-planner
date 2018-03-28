@@ -30,7 +30,7 @@ import java.util.Date;
  * Use the {@link NotesPage#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NotesPage extends Fragment {
+public class NotesPage extends Fragment implements Titleable {
     private static final String ARG_NOTES = "notes";
 
     private Notes notes;
@@ -78,6 +78,8 @@ public class NotesPage extends Fragment {
         if(null != notes) {
             ((EditText) view.findViewById(R.id.note_text)).setText(notes.getText());
         }
+
+        parent.changeTitle(getTitle());
         return view;
     }
 
@@ -112,5 +114,10 @@ public class NotesPage extends Fragment {
     public void onDetach() {
         super.onDetach();
         parent = null;
+    }
+
+    @Override
+    public String getTitle() {
+        return notes.getName();
     }
 }

@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 /**
  * A fragment representing a list of Items.
  */
-public class NotesList extends Fragment {
+public class NotesList extends Fragment implements Titleable {
     private Parent parent;
 
 
@@ -56,6 +56,8 @@ public class NotesList extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(new NotesItemRecyclerViewAdapter(parent.getNotes(), parent));
 
+        parent.changeTitle(getTitle());
+
         return view;
     }
 
@@ -73,5 +75,10 @@ public class NotesList extends Fragment {
     public void onDetach() {
         super.onDetach();
         parent = null;
+    }
+
+    @Override
+    public String getTitle() {
+        return "Notes";
     }
 }

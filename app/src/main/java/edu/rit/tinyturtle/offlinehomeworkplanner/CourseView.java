@@ -20,7 +20,7 @@ import java.util.List;
  * Use the {@link CourseView#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CourseView extends Fragment implements Parent {
+public class CourseView extends Fragment implements Parent, Titleable {
     private static final String ARG_COURSE = "course";
 
     private Course course;
@@ -77,8 +77,7 @@ public class CourseView extends Fragment implements Parent {
             }
         });
 
-
-
+        parent.changeTitle(getTitle());
 
         return view;
     }
@@ -141,5 +140,15 @@ public class CourseView extends Fragment implements Parent {
     @Override
     public boolean deleteNote(Notes notes) {
         return parent.deleteNote(notes);
+    }
+
+    @Override
+    public String getTitle() {
+        return course.getName();
+    }
+
+    @Override
+    public void changeTitle(String title) {
+        parent.changeTitle(title);
     }
 }

@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface Parent {
     void openFragment(Fragment fragment);
+    void changeTitle(String title);
     List<Course> getCourses();
     List<Homework> getHomeworks();
     List<Notes> getNotes();

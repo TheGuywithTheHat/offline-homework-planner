@@ -28,7 +28,7 @@ import java.util.Date;
  * Use the {@link CreateCourse#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CreateCourse extends OnTouchHideFragment implements ColorPickerCallback{
+public class CreateCourse extends OnTouchHideFragment implements ColorPickerCallback, Titleable {
     static final String TAG = "create_course";
     private static final String ARG_COURSE = "course";
     private static final int[] DAY_BUTTONS = {R.id.sun_button, R.id.mon_button,
@@ -157,6 +157,7 @@ public class CreateCourse extends OnTouchHideFragment implements ColorPickerCall
             ((EditText) view.findViewById(R.id.course_create_end)).setText(course.getEnd());
             setDays(view, course.getDays());
         }
+        parent.changeTitle(getTitle());
 
         return view;
     }
@@ -208,5 +209,12 @@ public class CreateCourse extends OnTouchHideFragment implements ColorPickerCall
     }
 
 
-
+    @Override
+    public String getTitle() {
+        if  (course == null || course.getName().equals("")) {
+            return "Create new course";
+        } else {
+            return course.getName();
+        }
+    }
 }

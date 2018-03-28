@@ -130,6 +130,9 @@ public class HomeScreen extends AppCompatActivity implements Parent, View.OnTouc
     }
 
     public void openFragment(Fragment fragment) {
+        if (!(fragment instanceof Titleable)) {
+            throw new IllegalArgumentException("Fragments must be Titleable to open them in the home screen");
+        }
         curFragment = fragment;
         if (fragment.getClass() == HomeList.class){
             mBottomNavigationView.setSelectedItemId(R.id.navigation_home);
@@ -140,6 +143,11 @@ public class HomeScreen extends AppCompatActivity implements Parent, View.OnTouc
         } else {
             openFragmentTransaction(fragment);
         }
+    }
+
+    @Override
+    public void changeTitle(String title) {
+        getSupportActionBar().setTitle(title);
     }
 
 

@@ -22,7 +22,7 @@ import java.util.List;
  * Use the {@link CreateNotes#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CreateNotes extends OnTouchHideFragment implements AdapterView.OnItemSelectedListener{
+public class CreateNotes extends OnTouchHideFragment implements Titleable, AdapterView.OnItemSelectedListener {
     private static final String ARG_NOTES = "notes";
     private static final String ARG_COURSE = "course";
 
@@ -106,9 +106,6 @@ public class CreateNotes extends OnTouchHideFragment implements AdapterView.OnIt
             }
         });
 
-        //TODO: finish spinner adapter
-        //((Spinner)view.findViewById(R.id.notes_create_course)).set
-
         if(notes != null) {
             ((EditText) view.findViewById(R.id.notes_create_title)).setText(notes.getName());
             if(notes.getCourse() != null) {
@@ -119,6 +116,8 @@ public class CreateNotes extends OnTouchHideFragment implements AdapterView.OnIt
             spinner.setSelection(adapter.getPosition(course.getName()));
         }
         view.setOnTouchListener(this);
+
+        parent.changeTitle(getTitle());
 
         return view;
     }
@@ -149,5 +148,14 @@ public class CreateNotes extends OnTouchHideFragment implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    @Override
+    public String getTitle() {
+        if  (notes == null || notes.getName().equals("")) {
+            return "Create new notes";
+        } else {
+            return notes.getName();
+        }
     }
 }

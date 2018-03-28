@@ -32,7 +32,7 @@ import java.util.Locale;
  * Use the {@link CreateHomework#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CreateHomework extends OnTouchHideFragment implements AdapterView.OnItemSelectedListener, TimePickerDialog.OnTimeSetListener {
+public class CreateHomework extends OnTouchHideFragment implements Titleable, AdapterView.OnItemSelectedListener, TimePickerDialog.OnTimeSetListener {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_HOMEWORK = "homework";
     private static final String ARG_COURSE = "course";
@@ -166,6 +166,8 @@ public class CreateHomework extends OnTouchHideFragment implements AdapterView.O
             spinner.setSelection(adapter.getPosition(course.getName()));
         }
         view.setOnTouchListener(this);
+
+        parent.changeTitle(getTitle());
         return view;
     }
 
@@ -201,5 +203,14 @@ public class CreateHomework extends OnTouchHideFragment implements AdapterView.O
     @Override
     public void onTimeSet(TimePicker timePicker, int i, int i1) {
 
+    }
+
+    @Override
+    public String getTitle() {
+        if  (homework == null || homework.getName().equals("")) {
+            return "Create new homework";
+        } else {
+            return homework.getName();
+        }
     }
 }
