@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
@@ -24,6 +26,7 @@ import android.widget.ToggleButton;
 import com.pes.androidmaterialcolorpickerdialog.ColorPicker;
 import com.pes.androidmaterialcolorpickerdialog.ColorPickerCallback;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -73,7 +76,6 @@ public class NotesPage extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (getArguments() != null) {
             notes = (Notes)getArguments().getSerializable(ARG_NOTES);
         }
@@ -99,6 +101,7 @@ public class NotesPage extends Fragment {
         }
         return view;
     }
+
 
 
     @Override
@@ -133,4 +136,5 @@ public class NotesPage extends Fragment {
         super.onDetach();
         parent = null;
     }
+
 }
