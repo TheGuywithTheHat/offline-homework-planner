@@ -24,6 +24,8 @@ import java.util.List;
  */
 public class CreateNotes extends OnTouchHideFragment implements AdapterView.OnItemSelectedListener{
     private static final String ARG_NOTES = "notes";
+    private static final String ARG_COURSE = "course";
+
 
     private Notes notes;
     private Course course;
@@ -43,10 +45,11 @@ public class CreateNotes extends OnTouchHideFragment implements AdapterView.OnIt
      * @param notes Notes to edit, if any.
      * @return A new instance of fragment CreateNotes.
      */
-    public static CreateNotes newInstance(Notes notes) {
+    public static CreateNotes newInstance(Notes notes, Course c) {
         CreateNotes fragment = new CreateNotes();
         Bundle args = new Bundle();
         args.putSerializable(ARG_NOTES, notes);
+        args.putSerializable(ARG_COURSE, c);
         fragment.setArguments(args);
         return fragment;
     }
@@ -106,10 +109,13 @@ public class CreateNotes extends OnTouchHideFragment implements AdapterView.OnIt
         //((Spinner)view.findViewById(R.id.notes_create_course)).set
 
         if(notes != null) {
+            ((EditText) view.findViewById(R.id.notes_create_title)).setText(notes.getName());
             if(notes.getCourse() != null) {
-                ((EditText) view.findViewById(R.id.notes_create_title)).setText(notes.getName());
+                spinner.setSelection(adapter.getPosition(notes.getCourse().getName()));
             }
 
+        } else if (course != null) {
+            spinner.setSelection(adapter.getPosition(course.getName()));
         }
         view.setOnTouchListener(this);
 

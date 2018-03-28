@@ -55,7 +55,7 @@ public class NotesList extends Fragment {
         FloatingActionButton newNotesFab = view.findViewById(R.id.create_notes_button);
         newNotesFab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                parent.openFragment(CreateNotes.newInstance(null));
+                parent.openFragment(CreateNotes.newInstance(null, null));
             }
         });
 

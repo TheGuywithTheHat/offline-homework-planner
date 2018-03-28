@@ -37,4 +37,6 @@
     <string name="navigation_header">Prototype Planner</string>
     <string name="create">Create</string>
     <string name="invalid_title">Please input a title.</string>
+    <string name="title_due">Due</string>
+    <string name="title_completed">Completed</string>
 </resources>

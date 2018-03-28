@@ -1,0 +1,107 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tab_view_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/tab_floating_action_button"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:tint="@android:color/white"
+        android:scaleType="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tab_view_frame_layout"
+        app:srcCompat="@drawable/ic_add_black_24dp" />
+
+    <RelativeLayout
+        android:id="@+id/tab_nested_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBarLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/course_view_tabs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:theme="@style/TabWidgetTheme" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/course_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/appBarLayout2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" >
+
+        </android.support.v4.view.ViewPager>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/tab_view_frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" >
+
+    </FrameLayout>
+
+
+</android.support.constraint.ConstraintLayout><!--<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/course_tab_host"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/TabWidgetTheme"
+    tools:context="edu.rit.tinyturtle.offlinehomeworkplanner.CourseView">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"/>
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <fragment
+                android:id="@+id/homework_tab"
+                android:name="edu.rit.tinyturtle.offlinehomeworkplanner.HomeworkList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout="@layout/homework_list" />
+
+            <fragment
+                android:id="@+id/notes_tab"
+                android:name="edu.rit.tinyturtle.offlinehomeworkplanner.NotesList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout="@layout/notes_list" />
+
+        </FrameLayout>
+    </LinearLayout>
+</TabHost>-->

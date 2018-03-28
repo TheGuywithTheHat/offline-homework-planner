@@ -14,6 +14,7 @@
         android:name="edu.rit.tinyturtle.offlinehomeworkplanner.HomeList"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:scaleType="center"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

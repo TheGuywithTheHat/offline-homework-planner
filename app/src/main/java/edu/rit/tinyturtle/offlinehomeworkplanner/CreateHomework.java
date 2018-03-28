@@ -35,6 +35,7 @@ import java.util.Locale;
 public class CreateHomework extends OnTouchHideFragment implements AdapterView.OnItemSelectedListener, TimePickerDialog.OnTimeSetListener {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_HOMEWORK = "homework";
+    private static final String ARG_COURSE = "course";
     private static final SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
 
@@ -57,10 +58,11 @@ public class CreateHomework extends OnTouchHideFragment implements AdapterView.O
      * @param hw homework to edit, if any
      * @return A new instance of fragment CreateHomework.
      */
-    public static CreateHomework newInstance(Homework hw) {
+    public static CreateHomework newInstance(Homework hw, Course c) {
         CreateHomework fragment = new CreateHomework();
         Bundle args = new Bundle();
         args.putSerializable(ARG_HOMEWORK, hw);
+        args.putSerializable(ARG_COURSE, c);
         fragment.setArguments(args);
         return fragment;
     }
@@ -70,6 +72,7 @@ public class CreateHomework extends OnTouchHideFragment implements AdapterView.O
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             homework = (Homework) getArguments().getSerializable(ARG_HOMEWORK);
+            course = (Course) getArguments().getSerializable(ARG_COURSE);
         }
     }
 
@@ -159,6 +162,8 @@ public class CreateHomework extends OnTouchHideFragment implements AdapterView.O
             if(homework.getCourse() != null) {
                 spinner.setSelection(adapter.getPosition(homework.getCourse().getName()));
             }
+        } else if (course != null) {
+            spinner.setSelection(adapter.getPosition(course.getName()));
         }
         view.setOnTouchListener(this);
         return view;

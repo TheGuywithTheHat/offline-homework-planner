@@ -2,7 +2,6 @@ package edu.rit.tinyturtle.offlinehomeworkplanner;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -54,19 +54,19 @@ public class CourseHomeworkTab extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.homework_list, container, false);
-        List<Homework> homeworkList = parent.getHomeworks();
+        List<Homework> homeworkList = new ArrayList<>(parent.getHomeworks());
         ListIterator<Homework> hIter = homeworkList.listIterator();
         while (hIter.hasNext()) {
             if (hIter.next().getCourse() != course)
                 hIter.remove();
         }
         HomeworkItemRecyclerViewAdapter adapter = new HomeworkItemRecyclerViewAdapter(homeworkList, parent);
-        FloatingActionButton newHWFab = view.findViewById(R.id.create_homework_button);
+        /*FloatingActionButton newHWFab = view.findViewById(R.id.create_homework_button);
         newHWFab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 parent.openFragment(CreateHomework.newInstance(null));
             }
-        });
+        });*/
         Context context = view.getContext();
         RecyclerView recyclerView = view.findViewById(R.id.homework_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
