@@ -2,6 +2,7 @@ package edu.rit.tinyturtle.offlinehomeworkplanner;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -64,8 +65,17 @@ public class CourseView extends Fragment implements Parent {
         mSectionsPageAdapter = new SectionsPageAdapter(getActivity().getSupportFragmentManager());
         mViewPager = (ViewPager) view.findViewById(R.id.course_view_pager);
         setupViewPager(mViewPager);
-        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.course_view_tabs);
+        final TabLayout tabLayout = (TabLayout) view.findViewById(R.id.course_view_tabs);
         tabLayout.setupWithViewPager(mViewPager);
+        FloatingActionButton newHWFab = view.findViewById(R.id.tab_floating_action_button);
+        newHWFab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (tabLayout.getSelectedTabPosition() == 0)
+                    openFragment(CreateHomework.newInstance(null, course));
+                else
+                    openFragment(CreateNotes.newInstance(null, course));
+            }
+        });
 
 
 
@@ -99,7 +109,7 @@ public class CourseView extends Fragment implements Parent {
     public void openFragment(Fragment fragment) {
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.course_view_frame_layout, fragment);
+        transaction.replace(R.id.course_view_layout, fragment);
         transaction.addToBackStack(null);
         transaction.commit();    }
 
@@ -116,21 +126,6 @@ public class CourseView extends Fragment implements Parent {
     @Override
     public List<Notes> getNotes() {
         return parent.getNotes();
-    }
-
-    @Override
-    public HomeList getHomeListFrag() {
-        return parent.getHomeListFrag();
-    }
-
-    @Override
-    public NotesList getNotesListFrag() {
-        return parent.getNotesListFrag();
-    }
-
-    @Override
-    public HomeworkList getHomeworkListFrag() {
-        return parent.getHomeworkListFrag();
     }
 
     @Override

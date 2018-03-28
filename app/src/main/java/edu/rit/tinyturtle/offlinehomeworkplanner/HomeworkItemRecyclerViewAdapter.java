@@ -18,11 +18,13 @@ import java.util.List;
 public class HomeworkItemRecyclerViewAdapter extends RecyclerView.Adapter<HomeworkItemRecyclerViewAdapter.ViewHolder> {
 
     private final List<Homework> mValues;
+    private boolean completed;
     private final Parent parent;
 
-    public HomeworkItemRecyclerViewAdapter(List<Homework> items, Parent parent) {
+    public HomeworkItemRecyclerViewAdapter(List<Homework> items, Parent parent, boolean completed) {
         mValues = items;
         this.parent = parent;
+        this.completed = completed;
     }
 
     public void completeHomework(int pos){
@@ -41,18 +43,23 @@ public class HomeworkItemRecyclerViewAdapter extends RecyclerView.Adapter<Homewo
             @Override
             public void onClick(View view) {
                 PopupMenu popupMenu = new PopupMenu(view.getContext(), view);
-                popupMenu.getMenuInflater().inflate(R.menu.homework_overflow, popupMenu.getMenu());
+                int menu = completed? R.menu.homework_complete_overflow : R.menu.homework_overflow;
+                popupMenu.getMenuInflater().inflate(menu, popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.homework_overflow_complete:
                                 viewHolder.mItem.setCompleted(true);
-                                parent.openFragment(new HomeworkList());
+                                parent.openFragment(HomeworkList.newInstance(completed));
                                 return true;
                             case R.id.homework_overflow_delete:
                                 parent.deleteHomework(viewHolder.mItem);
-                                parent.openFragment(new HomeworkList());
+                                parent.openFragment(HomeworkList.newInstance(completed));
+                                return true;
+                            case R.id.homework_overflow_uncomplete:
+                                viewHolder.mItem.setCompleted(false);
+                                parent.openFragment(HomeworkList.newInstance(completed));
                                 return true;
                         }
                         return false;
@@ -82,7 +89,7 @@ public class HomeworkItemRecyclerViewAdapter extends RecyclerView.Adapter<Homewo
                 if (null != parent) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    parent.openFragment(CreateHomework.newInstance(holder.mItem));
+                    parent.openFragment(CreateHomework.newInstance(holder.mItem, null));
                 }
             }
         });

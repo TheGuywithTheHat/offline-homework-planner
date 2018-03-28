@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -12,13 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
 /**
  * A fragment representing a list of Items.
  */
 public class HomeworkList extends Fragment {
-    private static final String ARG_COLUMN_COUNT = "column-count";
+    private static final String ARG_COMPLETED = "completed";
 
-    private int mColumnCount = 1;
+    private boolean completed;
     private Parent parent;
 
     /**
@@ -30,10 +33,10 @@ public class HomeworkList extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static HomeworkList newInstance(int columnCount) {
+    public static HomeworkList newInstance(boolean completed) {
         HomeworkList fragment = new HomeworkList();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putBoolean(ARG_COMPLETED, completed);
         fragment.setArguments(args);
         return fragment;
     }
@@ -43,7 +46,7 @@ public class HomeworkList extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            completed = getArguments().getBoolean(ARG_COMPLETED);
         }
     }
 
@@ -54,19 +57,26 @@ public class HomeworkList extends Fragment {
 
         // Set the adapter
         FloatingActionButton newHWFab = view.findViewById(R.id.create_homework_button);
-        newHWFab.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                parent.openFragment(CreateHomework.newInstance(null));
-            }
-        });
+        if (completed){
+            container.removeView(newHWFab);
+            newHWFab.setVisibility(View.GONE);
+        } else {
+            newHWFab.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    parent.openFragment(CreateHomework.newInstance(null, null));
+                }
+            });
+        }
         Context context = view.getContext();
         RecyclerView recyclerView = view.findViewById(R.id.homework_list);
-        if (mColumnCount <= 1) {
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        } else {
-            recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        List<Homework> homeworkList = new ArrayList<>(parent.getHomeworks());
+        ListIterator<Homework> hIter = homeworkList.listIterator();
+        while (hIter.hasNext()) {
+            if (hIter.next().isCompleted() != completed)
+                hIter.remove();
         }
-        HomeworkItemRecyclerViewAdapter adapter = new HomeworkItemRecyclerViewAdapter(parent.getHomeworks(), parent);
+        HomeworkItemRecyclerViewAdapter adapter = new HomeworkItemRecyclerViewAdapter(homeworkList, parent, completed);
         recyclerView.setAdapter(adapter);
         ItemTouchHelper.Callback callback = new SwipeHelper(adapter);
         ItemTouchHelper helper = new ItemTouchHelper(callback);

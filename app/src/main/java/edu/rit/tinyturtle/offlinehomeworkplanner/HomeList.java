@@ -11,11 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
 /**
  * A fragment representing a list of Items.
  */
 public class HomeList extends Fragment {
-    private static final String ARG_COLUMN_COUNT = "column-count";
     static final String ARG_ARCHIVED = "archived";
 
     private int mColumnCount = 1;
@@ -33,10 +36,10 @@ public class HomeList extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static HomeList newInstance(int columnCount) {
+    public static HomeList newInstance(boolean archived) {
         HomeList fragment = new HomeList();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putBoolean(ARG_ARCHIVED, archived);
         fragment.setArguments(args);
         return fragment;
     }
@@ -46,7 +49,6 @@ public class HomeList extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
             archived = getArguments().getBoolean(ARG_ARCHIVED);
         }
     }
@@ -71,7 +73,13 @@ public class HomeList extends Fragment {
         } else {
             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
         }
-        recyclerView.setAdapter(new CourseItemRecyclerViewAdapter(parent.getCourses(), parent, archived));
+        List<Course> courseList = new ArrayList<>(parent.getCourses());
+        ListIterator<Course> cIter = courseList.listIterator();
+        while (cIter.hasNext()) {
+            if (cIter.next().isArchived() != archived)
+                cIter.remove();
+        }
+        recyclerView.setAdapter(new CourseItemRecyclerViewAdapter(courseList, parent, archived));
 
         return view;
     }

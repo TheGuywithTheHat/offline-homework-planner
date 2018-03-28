@@ -3,6 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/navigation_drawer_completed"
+        android:icon="@drawable/ic_done_black_24dp"
+        android:title="@string/completed_homework" />
+    <item
         android:id="@+id/navigation_drawer_archives"
         android:icon="@drawable/ic_archive_black_24dp"
         android:title="@string/archives" />

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -52,7 +53,7 @@ public class CourseNotesTab extends Fragment {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.notes_list, container, false);
 
-        List<Notes> notesList = parent.getNotes();
+        List<Notes> notesList = new ArrayList<>(parent.getNotes());
         ListIterator<Notes> nIter = notesList.listIterator();
         while (nIter.hasNext()) {
             if (nIter.next().getCourse() != course)
@@ -60,11 +61,8 @@ public class CourseNotesTab extends Fragment {
         }
 
         FloatingActionButton newNotesFab = view.findViewById(R.id.create_notes_button);
-        newNotesFab.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                parent.openFragment(CreateNotes.newInstance(null));
-            }
-        });
+        container.removeView(newNotesFab);
+        newNotesFab.setVisibility(View.GONE);
 
         RecyclerView recyclerView = view.findViewById(R.id.notes_list);
         Context context = view.getContext();

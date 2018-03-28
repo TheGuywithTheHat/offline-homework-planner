@@ -143,7 +143,7 @@ public class CreateCourse extends OnTouchHideFragment implements ColorPickerCall
                     course.setEnd(sdf.format(end));
                     course.setDays(getDays(view));
                     course.setColor(colorHex);
-                    parent.openFragment(parent.getHomeListFrag());
+                    parent.openFragment(HomeList.newInstance(false));
                 } catch (ParseException e) {
                     Toast.makeText(getContext(), R.string.invalid_start_end, Toast.LENGTH_LONG).show();
                 }

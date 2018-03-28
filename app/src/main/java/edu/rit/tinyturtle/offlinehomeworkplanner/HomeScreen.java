@@ -23,14 +23,11 @@ import java.util.ListIterator;
 
 public class HomeScreen extends AppCompatActivity implements Parent, View.OnTouchListener {
     private FragmentManager fragmentManager;
-    private HomeList homeListFrag;
-    private NotesList notesListFrag;
-    private HomeList archiveListFrag;
-    private HomeworkList homeworkListFrag;
 
     List<Course> courses;
     List<Homework> homeworks;
     List<Notes> notes;
+    private Fragment curFragment;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private BottomNavigationView mBottomNavigationView;
@@ -41,15 +38,20 @@ public class HomeScreen extends AppCompatActivity implements Parent, View.OnTouc
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            if (curFragment != null) {
+                openFragmentTransaction(curFragment);
+                curFragment = null;
+                return true;
+            }
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    openFragmentTransaction(homeListFrag);
+                    openFragmentTransaction(HomeList.newInstance(false));
                     return true;
                 case R.id.navigation_notes:
-                    openFragmentTransaction(notesListFrag);
+                    openFragmentTransaction(NotesList.newInstance());
                     return true;
                 case R.id.navigation_homework:
-                    openFragmentTransaction(homeworkListFrag);
+                    openFragmentTransaction(HomeworkList.newInstance(false));
                     return true;
             }
             return false;
@@ -62,14 +64,20 @@ public class HomeScreen extends AppCompatActivity implements Parent, View.OnTouc
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_drawer_archives:
-                    openFragment(archiveListFrag);
+                    curFragment = HomeList.newInstance(true);
+                    openFragment(HomeList.newInstance(true));
                     mDrawerLayout.closeDrawer(Gravity.START, true);
                     mNavigationView.setSelected(false);
                     return true;
                 case R.id.navigation_drawer_settings:
-                    openFragment(notesListFrag);
                     mDrawerLayout.closeDrawer(Gravity.START, true);
                     return true;
+                case R.id.navigation_drawer_completed:
+                    curFragment = HomeworkList.newInstance(true);
+                    openFragment(HomeworkList.newInstance(true));
+                    mDrawerLayout.closeDrawer(Gravity.START, true);
+                    return true;
+
             }
             return false;
         }
@@ -80,13 +88,6 @@ public class HomeScreen extends AppCompatActivity implements Parent, View.OnTouc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         fragmentManager = getSupportFragmentManager();
-        homeListFrag = new HomeList();
-        archiveListFrag = new HomeList();
-        Bundle args = new Bundle();
-        args.putBoolean(HomeList.ARG_ARCHIVED, true);
-        archiveListFrag.setArguments(args);
-        homeworkListFrag = new HomeworkList();
-        notesListFrag = new NotesList();
         courses = new ArrayList<>();
         courses.add(new Course("default", "09:00 AM", "10:00 AM",
                 new boolean[] {false, true, false, true, false, true, false}, Color.MAGENTA));
@@ -121,6 +122,7 @@ public class HomeScreen extends AppCompatActivity implements Parent, View.OnTouc
     }
 
     private void openFragmentTransaction(Fragment fragment) {
+        curFragment = null;
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.main_frag_container, fragment);
         transaction.addToBackStack(null);
@@ -128,6 +130,7 @@ public class HomeScreen extends AppCompatActivity implements Parent, View.OnTouc
     }
 
     public void openFragment(Fragment fragment) {
+        curFragment = fragment;
         if (fragment.getClass() == HomeList.class){
             mBottomNavigationView.setSelectedItemId(R.id.navigation_home);
         } else if ((fragment.getClass() == HomeworkList.class)){
@@ -181,21 +184,6 @@ public class HomeScreen extends AppCompatActivity implements Parent, View.OnTouc
     @Override
     public boolean deleteNote(Notes n){
         return notes.remove(n);
-    }
-
-    @Override
-    public HomeList getHomeListFrag() {
-        return homeListFrag;
-    }
-
-    @Override
-    public NotesList getNotesListFrag() {
-        return notesListFrag;
-    }
-
-    @Override
-    public HomeworkList getHomeworkListFrag() {
-        return homeworkListFrag;
     }
 
     @Override
