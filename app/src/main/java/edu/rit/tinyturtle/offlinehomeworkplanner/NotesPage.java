@@ -1,8 +1,12 @@
 package edu.rit.tinyturtle.offlinehomeworkplanner;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -23,6 +28,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import static android.app.Activity.RESULT_OK;
 
 
 /**
@@ -36,6 +43,8 @@ public class NotesPage extends Fragment {
     private Notes notes;
 
     private Parent parent;
+    static final int CAM_REQUEST = 1;
+
 
     public NotesPage() {
         // Required empty public constructor
@@ -64,6 +73,7 @@ public class NotesPage extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             notes = (Notes)getArguments().getSerializable(ARG_NOTES);
         }
@@ -74,12 +84,22 @@ public class NotesPage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         final View view = inflater.inflate(R.layout.fragment_notes_page, container, false);
+        FloatingActionButton newNotesFab = view.findViewById(R.id.camera_pic);
+        newNotesFab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(camera_intent,CAM_REQUEST);
+
+            }
+        });
         if(null != notes) {
             ((EditText) view.findViewById(R.id.note_text)).setText(notes.getText());
         }
         return view;
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
