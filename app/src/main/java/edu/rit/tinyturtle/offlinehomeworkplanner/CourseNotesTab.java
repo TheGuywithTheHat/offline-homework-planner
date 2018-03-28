@@ -78,7 +78,7 @@ public class CourseNotesTab extends Fragment {
         List<Fragment> l = getFragmentManager().getFragments();
         Parent f = (Parent) context;
         for (Fragment frag: l){
-            if (frag.getClass() == CourseView.class){
+            if (frag instanceof CourseView){
                 f = (Parent) frag;
                 break;
             }

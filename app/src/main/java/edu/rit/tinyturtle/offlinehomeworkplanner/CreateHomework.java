@@ -188,9 +188,42 @@ public class CreateHomework extends OnTouchHideFragment implements AdapterView.O
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         if (!spinner.getSelectedItem().equals(getString(R.string.select_class))) {
             course = parent.getCourses().get(i);
+            if (adapter.getPosition(getString(R.string.select_class)) < 0 || homework == null){
+
+                setDueDate(view);
+            }
             adapter.remove(getString(R.string.select_class));
 
         }
+    }
+
+    private void setDueDate(View view){
+        Calendar c = Calendar.getInstance();
+        int day = c.get(Calendar.DAY_OF_WEEK) - 1;
+        int nextDay = getNextClassDay(day);
+        if (nextDay >= 0) {
+            int dayDifference = (nextDay + 7 - day)%7;
+            if (dayDifference == 0 )
+                dayDifference += 7;
+            EditText editDate = (EditText) getView().findViewById(R.id.homework_create_due_date);
+            c.add(Calendar.DATE, dayDifference);
+            Date d = c.getTime();
+            editDate.setText(sdf.format(c.getTime()));
+
+        }
+    }
+
+    private int getNextClassDay(int day){
+        boolean[] dayArray = course.getDays();
+        int i = day + 1;
+        do {
+            if (i >= dayArray.length)
+                i = 0;
+            if (dayArray[i])
+                return i;
+            i++;
+        } while( i != day);
+        return -1;
     }
 
     @Override
