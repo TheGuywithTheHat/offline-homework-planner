@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -207,7 +208,6 @@ public class CreateHomework extends OnTouchHideFragment implements AdapterView.O
                 dayDifference += 7;
             EditText editDate = (EditText) getView().findViewById(R.id.homework_create_due_date);
             c.add(Calendar.DATE, dayDifference);
-            Date d = c.getTime();
             editDate.setText(sdf.format(c.getTime()));
 
         }

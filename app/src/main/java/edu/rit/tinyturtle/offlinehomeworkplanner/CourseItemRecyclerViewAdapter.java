@@ -95,6 +95,7 @@ public class CourseItemRecyclerViewAdapter extends RecyclerView.Adapter<CourseIt
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mNameView.setText(mValues.get(position).getName());
+        holder.mTimeView.setText(mValues.get(position).getStart());
         View colorSlot = holder.mView.findViewById(R.id.class_item_box);
         int color = holder.mItem.getColor();
         colorSlot.setBackgroundColor(color);
@@ -128,12 +129,14 @@ public class CourseItemRecyclerViewAdapter extends RecyclerView.Adapter<CourseIt
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView mNameView;
+        public final TextView mTimeView;
         public Course mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mNameView = (TextView) view.findViewById(R.id.course_name);
+            mTimeView = (TextView) view.findViewById(R.id.course_time);
         }
 
         @Override
