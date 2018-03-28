@@ -18,7 +18,7 @@ import java.util.ListIterator;
 /**
  * A fragment representing a list of Items.
  */
-public class HomeList extends Fragment {
+public class HomeList extends Fragment implements Titleable {
     static final String ARG_ARCHIVED = "archived";
 
     private int mColumnCount = 1;
@@ -81,6 +81,8 @@ public class HomeList extends Fragment {
         }
         recyclerView.setAdapter(new CourseItemRecyclerViewAdapter(courseList, parent, archived));
 
+        parent.changeTitle(getTitle());
+
         return view;
     }
 
@@ -98,5 +100,10 @@ public class HomeList extends Fragment {
     public void onDetach() {
         super.onDetach();
         parent = null;
+    }
+
+    @Override
+    public String getTitle() {
+        return "Classes";
     }
 }
