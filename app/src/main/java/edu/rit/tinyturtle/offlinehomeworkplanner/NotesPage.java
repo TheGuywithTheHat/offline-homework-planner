@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -54,12 +57,17 @@ public class NotesPage extends Fragment {
         return fragment;
     }
 
+    private void save() {
+        notes.setText(((EditText)getView().findViewById(R.id.note_text)).getText().toString());
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             notes = (Notes)getArguments().getSerializable(ARG_NOTES);
         }
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -74,11 +82,24 @@ public class NotesPage extends Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+        menuInflater.inflate(R.menu.save_menu, menu);
+        super.onCreateOptionsMenu(menu, menuInflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        save();
+        Toast.makeText(getContext(), R.string.saved_message, Toast.LENGTH_LONG).show();
+        return super.onOptionsItemSelected(menuItem);
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
-        notes.setText(((EditText)getView().findViewById(R.id.note_text)).getText().toString());
-
+        save();
     }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

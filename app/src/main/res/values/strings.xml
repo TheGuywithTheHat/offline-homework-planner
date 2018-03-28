@@ -39,4 +39,5 @@
     <string name="invalid_title">Please input a title.</string>
     <string name="completed_homework">Completed Homework</string>
     <string name="uncomplete">Uncomplete</string>
+    <string name="saved_message">Notes are autosaved upon closing, although this button manually saves just in case</string>
 </resources>
