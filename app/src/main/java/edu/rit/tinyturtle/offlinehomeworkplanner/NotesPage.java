@@ -114,7 +114,7 @@ public class NotesPage extends Fragment implements Titleable {
     public void takePhoto() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        imageUri = FileProvider.getUriForFile(getActivity(), BuildConfig.APPLICATION_ID + ".provider",
+        /*imageUri = FileProvider.getUriForFile(getActivity(), BuildConfig.APPLICATION_ID + ".provider",
                 new File(new File(getContext().getFilesDir(), "images"), "photo_" + System.currentTimeMillis()));
 
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
@@ -137,7 +137,7 @@ public class NotesPage extends Fragment implements Titleable {
                 String packageName = resolveInfo.activityInfo.packageName;
                 getActivity().grantUriPermission(packageName, imageUri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             }
-        }
+        }*/
 
         startActivityForResult(intent, CAM_REQUEST);
     }
@@ -148,12 +148,13 @@ public class NotesPage extends Fragment implements Titleable {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = 4;
 
-            Bitmap bitmap = BitmapFactory.decodeFile(imageUri.getPath(), options);
+            //Bitmap bitmap = BitmapFactory.decodeFile(imageUri.getPath(), options);
 
             ImageView imageView = new ImageView(getContext());
             EditText editText = new EditText(getContext());
 
-            imageView.setImageBitmap(bitmap);
+            //imageView.setImageBitmap(bitmap);
+            imageView.setImageBitmap((Bitmap)data.getExtras().get("data"));
             LinearLayout layout = getView().findViewById(R.id.notes_page_layout);
             layout.addView(imageView);
             layout.addView(editText);
