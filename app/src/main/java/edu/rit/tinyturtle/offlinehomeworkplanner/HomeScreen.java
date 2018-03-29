@@ -200,4 +200,9 @@ public class HomeScreen extends AppCompatActivity implements Parent, View.OnTouc
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         return false;
     }
+
+    @Override
+    public Parent getFragmentParent(){
+        return this;
+    }
 }

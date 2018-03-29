@@ -41,7 +41,10 @@ public class NotesItemRecyclerViewAdapter extends RecyclerView.Adapter<NotesItem
                         switch (menuItem.getItemId()) {
                             case R.id.notes_overflow_delete:
                                 parent.deleteNote(viewHolder.mItem);
-                                parent.openFragment(new NotesList());
+                                if (parent instanceof CourseView)
+                                    parent.getFragmentParent().openFragment(CourseView.newInstance(viewHolder.mItem.getCourse()));
+                                else
+                                    parent.openFragment(new NotesList());
                                 return true;
                         }
                         return false;

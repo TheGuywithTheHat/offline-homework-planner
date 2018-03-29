@@ -17,4 +17,5 @@ public interface Parent {
     boolean deleteCourse(Course course);
     boolean deleteHomework(Homework homework);
     boolean deleteNote(Notes notes);
+    Parent getFragmentParent();
 }

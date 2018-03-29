@@ -180,4 +180,9 @@ public class CourseView extends Fragment implements Parent, Titleable {
     public void changeTitle(String title) {
         parent.changeTitle(title);
     }
+
+    @Override
+    public Parent getFragmentParent(){
+        return parent;
+    }
 }

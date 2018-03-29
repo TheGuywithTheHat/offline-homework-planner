@@ -51,11 +51,17 @@ public class HomeworkItemRecyclerViewAdapter extends RecyclerView.Adapter<Homewo
                         switch (menuItem.getItemId()) {
                             case R.id.homework_overflow_complete:
                                 viewHolder.mItem.setCompleted(true);
-                                parent.openFragment(HomeworkList.newInstance(completed));
+                                if (parent instanceof CourseView)
+                                    parent.getFragmentParent().openFragment(CourseView.newInstance(viewHolder.mItem.getCourse()));
+                                else
+                                    parent.openFragment(HomeworkList.newInstance(completed));
                                 return true;
                             case R.id.homework_overflow_delete:
                                 parent.deleteHomework(viewHolder.mItem);
-                                parent.openFragment(HomeworkList.newInstance(completed));
+                                if (parent instanceof CourseView)
+                                    parent.getFragmentParent().openFragment(CourseView.newInstance(viewHolder.mItem.getCourse()));
+                                else
+                                    parent.openFragment(HomeworkList.newInstance(completed));
                                 return true;
                             case R.id.homework_overflow_uncomplete:
                                 viewHolder.mItem.setCompleted(false);
