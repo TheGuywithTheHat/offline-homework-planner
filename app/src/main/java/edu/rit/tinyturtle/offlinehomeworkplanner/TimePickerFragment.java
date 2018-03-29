@@ -7,10 +7,9 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.widget.EditText;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -26,6 +25,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
     private int timeId;
     private int hours;
     private int minutes;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +36,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
         }
     }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -44,18 +45,14 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
     @Override
     public void onTimeSet(TimePicker timePicker, int hours, int minutes) {
-        String time = hours + ":" + minutes;
-        sdf.applyPattern("hh:mm");
-        try{
-            Date date = sdf.parse(time);
-            EditText editText = ((EditText) getActivity().findViewById(timeId));
-            sdf.applyPattern("hh:mm a");
-            if (editText != null) {
-                editText.setText(sdf.format(date));
-            }
-        } catch (ParseException e){
-            Toast.makeText(getContext(), R.string.invalid_start_end, Toast.LENGTH_LONG).show();
-            sdf.applyPattern("hh:mm a");
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date(0));
+        c.add(Calendar.HOUR_OF_DAY, hours);
+        c.add(Calendar.MINUTE, minutes);
+        EditText editText = ((EditText) getActivity().findViewById(timeId));
+
+        if (editText != null) {
+            editText.setText(sdf.format(c.getTime()));
         }
     }
 
