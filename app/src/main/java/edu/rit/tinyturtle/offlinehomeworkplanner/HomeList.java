@@ -104,6 +104,7 @@ public class HomeList extends Fragment implements Titleable {
 
     @Override
     public String getTitle() {
-        return "Classes";
+        String title = archived ? getString(R.string.archived_classes_title) : getString(R.string.classes_title);
+        return title;
     }
 }

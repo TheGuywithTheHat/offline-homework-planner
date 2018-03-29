@@ -149,6 +149,7 @@ public class HomeworkList extends Fragment implements Titleable {
 
     @Override
     public String getTitle() {
-        return "Homework items";
+        String title = completed ? getString(R.string.completed_homework_title) : getString(R.string.homework_title);
+        return title;
     }
 }

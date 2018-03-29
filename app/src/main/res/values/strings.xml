@@ -42,4 +42,8 @@
     <string name="saved_message">Notes are autosaved upon closing, although this button manually saves just in case</string>
     <string name="delete_all">Delete Completed Homework</string>
     <string name="complete_all">Complete All Homework</string>
+    <string name="archived_classes_title">Archived Classes</string>
+    <string name="classes_title">Classes</string>
+    <string name="completed_homework_title">Completed Homework</string>
+    <string name="homework_title">Homework Items</string>
 </resources>
