@@ -91,8 +91,11 @@ public class CreateNotes extends OnTouchHideFragment implements Titleable, Adapt
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String title = ((EditText) view.findViewById(R.id.notes_create_title)).getText().toString();
-                if (title.equals("")){
+                if (title.length() == 0){
                     Toast.makeText(getContext(), R.string.invalid_title, Toast.LENGTH_LONG).show();
+                    return;
+                } else if (title.length() > 30) {
+                    Toast.makeText(getContext(), R.string.max_title_length, Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(notes == null) {

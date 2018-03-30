@@ -10,7 +10,6 @@ import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by iceem on 3/24/2018.
@@ -46,7 +45,8 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
     @Override
     public void onTimeSet(TimePicker timePicker, int hours, int minutes) {
         Calendar c = Calendar.getInstance();
-        c.setTime(new Date(0));
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
         c.add(Calendar.HOUR_OF_DAY, hours);
         c.add(Calendar.MINUTE, minutes);
         EditText editText = ((EditText) getActivity().findViewById(timeId));

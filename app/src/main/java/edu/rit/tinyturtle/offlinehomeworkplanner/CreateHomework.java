@@ -5,7 +5,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -134,8 +133,11 @@ public class CreateHomework extends OnTouchHideFragment implements Titleable, Ad
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String title = ((EditText) view.findViewById(R.id.homework_create_title)).getText().toString();
-                if (title.equals("")){
+                if (title.length() ==0){
                     Toast.makeText(getContext(), R.string.invalid_title, Toast.LENGTH_LONG).show();
+                    return;
+                } else if (title.length() > 30) {
+                    Toast.makeText(getContext(), R.string.max_title_length, Toast.LENGTH_LONG).show();
                     return;
                 }
                 String dueDate = ((EditText) (view.findViewById(R.id.homework_create_due_date))).getText().toString();
