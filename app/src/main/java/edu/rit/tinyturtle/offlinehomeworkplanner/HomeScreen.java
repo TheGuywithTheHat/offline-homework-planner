@@ -24,9 +24,9 @@ import java.util.ListIterator;
 public class HomeScreen extends AppCompatActivity implements Parent, View.OnTouchListener {
     private FragmentManager fragmentManager;
 
-    List<Course> courses;
-    List<Homework> homeworks;
-    List<Notes> notes;
+    List<Course> courses = new ArrayList<>();
+    List<Homework> homeworks = new ArrayList<>();
+    List<Notes> notes = new ArrayList<>();
     private Fragment curFragment;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -88,13 +88,27 @@ public class HomeScreen extends AppCompatActivity implements Parent, View.OnTouc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         fragmentManager = getSupportFragmentManager();
-        courses = new ArrayList<>();
-        courses.add(new Course("default", "09:00 AM", "10:00 AM",
-                new boolean[] {false, true, false, true, false, true, false}, Color.MAGENTA));
-        homeworks = new ArrayList<>();
-        homeworks.add(new Homework("default hw","3/30/2018", courses.get(0),  false));
-        notes = new ArrayList<>();
-        notes.add(new Notes("default note", courses.get(0), "blank"));
+        Course math = new Course("Math", "08:00 AM", "08:55 AM", new boolean[] {false, true, true, true, true, true, false}, Color.MAGENTA);
+        Course biology = new Course("Biology", "09:00 AM", "09:55 AM", new boolean[] {false, true, true, true, true, true, false}, Color.LTGRAY);
+        Course english = new Course("English", "10:00 AM", "10:55 AM", new boolean[] {false, true, true, true, true, true, false}, Color.BLUE);
+        Course health = new Course("Health", "11:00 AM", "11:55 AM", new boolean[] {false, true, true, true, true, true, false}, Color.rgb(20, 200, 100));
+        Homework mathHW = new Homework("Factoring Homework", "04/25/2018", math, false);
+        Homework biologyHW = new Homework("Cells Homework", "04/19/2018", biology, false);
+        Notes biologyNotes = new Notes("Bio notes 1", biology, "Mitochondria is the powerhouse of the cell");
+        Notes mathNotes = new Notes("Slope notes", math, "y=mx+b\na^2+b^2=c^2");
+        Notes englishNotes = new Notes("The English rule", english, getResources().getString(R.string.i_before_e));
+        courses.add(math);
+        courses.add(biology);
+        courses.add(english);
+        courses.add(health);
+        notes.add(mathNotes);
+        notes.add(biologyNotes);
+        notes.add(englishNotes);
+        homeworks.add(mathHW);
+        homeworks.add(biologyHW);
+
+
+
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);

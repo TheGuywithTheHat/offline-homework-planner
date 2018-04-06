@@ -47,4 +47,5 @@
     <string name="completed_homework_title">Completed Homework</string>
     <string name="homework_title">Homework Items</string>
     <string name="max_title_length">Max title length is 30 characters</string>
+    <string name="i_before_e">"I" before "E" except after "C".</string>
 </resources>
