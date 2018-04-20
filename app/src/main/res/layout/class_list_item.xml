@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="72dp"
     android:alpha="1"
+    android:background="@drawable/borderlines"
     android:orientation="horizontal">
 
     <View
