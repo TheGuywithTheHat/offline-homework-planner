@@ -6,8 +6,4 @@
         android:id="@+id/homework_overflow_complete"
         android:icon="@drawable/ic_done_black_24dp"
         android:title="@string/complete" />
-    <item
-        android:id="@+id/homework_overflow_delete"
-        android:icon="@drawable/ic_delete_black_24dp"
-        android:title="@string/delete" />
 </menu>

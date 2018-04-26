@@ -65,10 +65,6 @@ public class CourseItemRecyclerViewAdapter extends RecyclerView.Adapter<CourseIt
                                 viewHolder.mItem.setArchived(true);
                                 parent.openFragment(new HomeList());
                                 return true;
-                            case R.id.class_overflow_delete:
-                                parent.deleteCourse(viewHolder.mItem);
-                                parent.openFragment(new HomeList());
-                                return true;
                             case R.id.archive_overflow_delete:
                                 parent.deleteCourse(viewHolder.mItem);
                                 parent.openFragment(new HomeList());
