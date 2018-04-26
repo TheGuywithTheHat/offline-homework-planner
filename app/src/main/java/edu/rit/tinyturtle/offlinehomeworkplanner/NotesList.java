@@ -10,6 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
 /**
  * A fragment representing a list of Items.
  */
@@ -54,7 +58,15 @@ public class NotesList extends Fragment implements Titleable {
         RecyclerView recyclerView = view.findViewById(R.id.notes_list);
         Context context = view.getContext();
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(new NotesItemRecyclerViewAdapter(parent.getNotes(), parent));
+        List<Notes> notesList = new ArrayList<>(parent.getNotes());
+        ListIterator<Notes> nIter = notesList.listIterator();
+        while (nIter.hasNext()) {
+            Notes n = nIter.next();
+            if (n.getCourse().isArchived())
+                nIter.remove();
+        }
+        recyclerView.setAdapter(new NotesItemRecyclerViewAdapter(notesList, parent));
+
 
         parent.changeTitle(getTitle());
 

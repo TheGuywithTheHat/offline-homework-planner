@@ -77,7 +77,8 @@ public class HomeworkList extends Fragment implements Titleable {
         List<Homework> homeworkList = new ArrayList<>(parent.getHomeworks());
         ListIterator<Homework> hIter = homeworkList.listIterator();
         while (hIter.hasNext()) {
-            if (hIter.next().isCompleted() != completed)
+            Homework h = hIter.next();
+            if (h.isCompleted() != completed || h.getCourse().isArchived())
                 hIter.remove();
         }
         HomeworkItemRecyclerViewAdapter adapter = new HomeworkItemRecyclerViewAdapter(homeworkList, parent, completed);
